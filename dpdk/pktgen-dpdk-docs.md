@@ -1,3 +1,9 @@
+# pktgen-dpdk
+
+## 一、介绍说明
+pktgen-dpdk是一个基于dpdk的高性能的收发包工具。
+
+
 ### 命令行运行pktgen-dpdk
 ```bash
 $ cd pktgen
