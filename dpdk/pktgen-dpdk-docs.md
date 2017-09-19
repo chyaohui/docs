@@ -9,7 +9,7 @@ DPDK 16.11.0
 * pktgen版本
 Pktgen Ver: 3.0.16
 
-##二、DPDK环境部署及设置
+## 二、DPDK环境部署及设置
 
 ### 1) dpdk的编译安装
 ... ...
