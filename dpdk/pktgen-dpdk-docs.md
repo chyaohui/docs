@@ -10,7 +10,12 @@ pktgen-dpdk是一个基于dpdk的高性能的收发包工具。
 ```Pktgen Ver: 3.0.16```
 
 ### 基本环境安装
-
+```bash
+$ yum update -y
+$ reboot
+$ yum install gcc make kernel kernel-devel -y
+$ yum install numactl numactl-libs numactl-devel -y
+```
 
 ## 二、DPDK环境部署及设置
 
