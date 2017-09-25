@@ -19,5 +19,10 @@ $ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT    #执行破解
 ```
 破解完成之后，会提供一些注册信息. enter license data按照破解信息依次输入即可.
 
+### 3)安装kvm环境
+```bash
+$ sudo apt-get install qemu-kvm qemu-system libvirt-bin virt-manager bridge-utils vlan
+```
+
 
 ## 2.知识类
