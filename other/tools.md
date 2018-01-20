@@ -1,6 +1,6 @@
 > 平时工作或学习过程中工具使用总结
 
-# 1.工具类
+# 一、工具类
 ## 1)SQLite数据库的可视化管理工具(SQLite Manager)
 - 依赖：Firefox浏览器（以浏览器插件的形式）
 - Firefox浏览器插件管理器中搜索"SQLite", 安装即可
@@ -30,4 +30,4 @@ $ sudo apt-get install qemu-kvm qemu-system libvirt-bin virt-manager bridge-util
 - `Markdown Preview Plus` 可以通过chrome预览markdown文件html格式的插件
 - `谷歌访问助手` 提供简单科学上网(google google_email等)
 
-# 2.知识类
+# 二、知识类
