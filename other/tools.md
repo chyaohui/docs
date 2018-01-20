@@ -28,6 +28,6 @@ $ sudo apt-get install qemu-kvm qemu-system libvirt-bin virt-manager bridge-util
 - `vimium` 支持在浏览网页时以vim的方式进行各种翻页、点击等快捷操作
 - `octotree` 在浏览github网站上的代码时能够以IDE的方式来展示代码目录树
 - `Markdown Preview Plus` 可以通过chrome预览markdown文件html格式的插件
-
+- `谷歌访问助手` 提供简单科学上网(google google_email等)
 
 # 2.知识类
