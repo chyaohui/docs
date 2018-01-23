@@ -31,3 +31,4 @@ $ sudo apt-get install qemu-kvm qemu-system libvirt-bin virt-manager bridge-util
 - `谷歌访问助手` 提供简单科学上网(google google_email等)
 
 # 二、知识类
+
