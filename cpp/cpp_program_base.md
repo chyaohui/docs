@@ -56,4 +56,10 @@ cout << "Hello World.";
 cin >> a;
 // 也可以使用 scanf 和 printf
 ```
-
+## 5.使用std空间下的相关数据
+所有标准类型、对象和函数都位于`std`命名空间中
+```cpp
+std::cout		/* 标准输出对象 */
+std::endl		/* 标准结束行的对象 */
+std::cin		/* 标准的输入对象 */
+```
