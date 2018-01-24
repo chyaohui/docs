@@ -50,3 +50,10 @@ $ gcc first.c -x c++
 - C的头文件在C++中使用: <cstdio> <cstring> <ctime>
 - 使用系统的头文件(非标C头文件): <pthread.h> <sys/types.h>
 
+## 4.流操作
+```cpp
+cout << "Hello World.";
+cin >> a;
+// 也可以使用 scanf 和 printf
+```
+
