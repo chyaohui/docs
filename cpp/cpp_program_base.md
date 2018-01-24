@@ -62,4 +62,20 @@ cin >> a;
 std::cout       /* 标准输出对象 */
 std::endl       /* 标准结束行的对象 */
 std::cin        /* 标准的输入对象 */
+std::cout << "hello world" << std::endl;
+```
+前面加空间名，是最根本的使用方式
+
+## 6.使用声明的方式
+使用声明的方式，能简化一个对象的使用
+```cpp
+using std::cout;
+using std::endl;
+cout << "hello world" << endl;
+```
+## 7.使用指令的方式
+使用指令的方式，能简化多个对象的使用
+```cpp
+using namespace std;
+cout<<"hello world"<<endl;
 ```
