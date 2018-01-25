@@ -80,7 +80,7 @@ using namespace std;
 cout << "hello world" << endl;
 ```
 ## 三、名字空间
-## 1.为什么需要名字空间(why)
+### 1.为什么需要名字空间(why)
 - 划分逻辑单元
 - 避免名字冲突
 
