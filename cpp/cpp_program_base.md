@@ -130,15 +130,15 @@ cout << "hello world" << endl;
 - 计算机(大端、小端序列，网络序列永远是大端序列)——小低低(计算机字节序)
 ```cpp
 union var{
-        char c[4];
-        int i;
+    char c[4]; int i;
 };
-int main(){
-        union var data;
-        data.c[0] = 0x04; data.c[1] = 0x03;
-        data.c[2] = 0x02; data.c[3] = 0x11; 
-        printf("%x\n",data.i);
-}     // 数组中下标低的，地址也低 结果为：11020304
+union var data;
+data.c[0] = 0x04; data.c[1] = 0x03;
+data.c[2] = 0x02; data.c[3] = 0x11; 
+printf("%x\n",data.i);  // 数组中下标低的，地址也低 结果为：11020304
+// 第2种方式：
+union var{ int data; char i; }test;
+test.data = 1; if (test.i == 1) printf("little endian");
 ```
 
 ### 3.C++枚举
