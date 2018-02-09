@@ -51,3 +51,7 @@ $ sudo apt-get install qemu-kvm qemu-system libvirt-bin virt-manager bridge-util
 '黑龙江' '甘肃' '江西' '安徽' '四川' '贵州' '广东' '青海' '云南' '海南' '台湾'
 ```
 
+## 2) 国内几大运营商
+```python
+'电信' '联通' '移动' '铁通' '教育网' '鹏博士(电信通 宽带通 长城宽带)'
+```
