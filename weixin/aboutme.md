@@ -42,16 +42,6 @@
 * 扩展自己的交友圈子，能够交到更多的同行朋友
 
 
+### 欢迎关注公众号: 「linuxblogs」
 
-
-
-
-
-
-
-
-
-
-
-
-
+![微信二维码](https://mmbiz.qpic.cn/mmbiz_jpg/yVibDjicRT1VsV0RH8KV6zMUhvJIajBDGibNAM19nKibia5Ae59EOnic3MJNrhJYdXOPqpVLXAvnr4ICAaZTBhW1JUxA/0?wx_fmt=jpeg)
