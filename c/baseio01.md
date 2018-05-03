@@ -76,18 +76,51 @@ fseek(fp, 6, SEEK_CUR);     // 从当前位置向后移动6个字节
 fseek(fp, -3, SEEK_END);    // 从文件尾向前移动3个字节
 ```
 
+offset 可正可负，负值表示向文件开头的方向移动，正值表示向文件尾方向移动，如果向前移动的字节数超过文件开头则出错返回，如果向后移动的字节数超过了文件末尾，再次写入会增加文件尺寸，文件空洞字节都是 0
 
+```c
+$ echo "5678" > file.txt
 
+fp = fopen("file.txt", "r+");
+fseek(fp, 10, SEEK_SET);
+fputc('K', fp)
+fclose(fp)
 
+// 通过结果可以看出字母K是从第10个位置开始写的
+liwei:/tmp$ od -tx1 -tc -Ax file.txt 
+0000000    35  36  37  38  0a  00  00  00  00  00  4b                    
+           5   6   7   8  \n  \0  \0  \0  \0  \0   K
+```
 
+rewind(fp) 等价于 fseek(fp, 0, SEEK_SET)
 
-
-
-
-
-
+ftell(fp) 函数比较简单，直接返回当前文件指针在文件中的位置
+```c
+// 实现计算文件字节数的功能
+fseek(fp, 0, SEEK_END);
+ftell(fp);
+```
 
 ## 字符串为单位的IO函数
+fgets 从指定的文件中读一行字符到调用者提供的缓冲区，读入内容不超过 size 。
+```c
+char *fgets(char *s, int size, FILE *stream);
+char *gets(char *s);
+```
+
+首先要说明 gets() 函数强烈不推荐使用，类似 strcpy 用户不可以指定缓冲区大小，很容易造成缓冲区溢出错误。不过 strcpy 程序员还是可以避免，而 gets 的输入用户可以提供任意长的字符串，唯一避免方法就是不使用 gets，而使用 fgets(buf, size, stdin)
+
+fgets 函数从 stream 所指文件读取以 '\n' 结尾的一行，包括 '\n' 在内，存到缓冲区中，并在该行结尾添加一个 '\0' 组成完整的字符串。如果文件一行太长，fgets 从文件中读了 size-1 个字符还没有读到 '\n'，就把已经读到的 size-1 个字符和一个 '\0' 字符存入缓冲区，文件剩余的半行可以在下次调用 fgets 时继续读。
+
+若一次 fgets 调用在读入若干字符后到达文件末尾，则将已读到的字符加上 '\0' 存入缓冲区并返回，如果再次调用则返回 NULL，可以据此判断是否读到文件末尾。
+
+fputs 向指定文件写入一个字符串，缓冲区保存的是以 '\0' 结尾的字符串，与 fgets 不同的是，fputs 不关心字符串中的 '\n' 字符。
+```c
+int fputs(const char *s, FILE *stream);
+int puts(const char *s);
+```
+
+
 
 ## 记录为单位的IO函数
 
