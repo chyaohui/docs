@@ -59,6 +59,32 @@ int putchar(int c);
 为什么使用 int 类型？可以看到这几个函数的参数和返回值类型都是 int，而非 unsigned char 型。因为错误或读到文件末尾时将返回 EOF，即 -1，如果返回值是 unsigned char（0xff），与实际读到字节 0xff 无法区分，如果使用 int 就可以避免这个问题。
 
 ## 操作读写位置函数
+当我们在操作文件时，有一个叫「文件指针」的家伙来记录当前操作的文件位置，比如刚打开文件，调用了 1 次 fgetc 后，此时文件指针指向了第 1 个字节后边，注意是以字节为单位记录的。
+
+改变文件指针位置的函数：
+```c
+#include <stdio.h>
+int fseek(FILE *stream, long offset, int whence);
+whence：从何处开始移动，取值：SEEK_SET | SEEK_CUR | SEEK_END
+offset：移动偏移量，取值：可取正 | 负
+void rewind(FILE *stream);
+```
+举几个简单例子：
+```c
+fseek(fp, 5, SEEK_SET);     // 从文件头向后移动5个字节
+fseek(fp, 6, SEEK_CUR);     // 从当前位置向后移动6个字节
+fseek(fp, -3, SEEK_END);    // 从文件尾向前移动3个字节
+```
+
+
+
+
+
+
+
+
+
+
 
 
 ## 字符串为单位的IO函数
