@@ -8,7 +8,9 @@
 ## 什么是库函数
 而库函数可以理解为是对系统调用的一层封装。系统调用作为内核提供给用户程序的接口，它的执行效率是比较高效而精简的，但有时我们需要对获取的信息进行更复杂的处理，或更人性化的需要，我们把这些处理过程封装成一个函数再提供给程序员，更方便于程序猿编码。
 
-库函数有可能包含有一个系统调用，有可能有好几个系统调用，当然也有可能没有系统调用，比如有些操作不需要涉及内核的功能。
+库函数有可能包含有一个系统调用，有可能有好几个系统调用，当然也有可能没有系统调用，比如有些操作不需要涉及内核的功能。可以参考下图来理解库函数与系统调用的关系。
+![库函数与系统调用](https://mmbiz.qpic.cn/mmbiz_png/yVibDjicRT1VvTz98y3eafz4DibicG9NRXOaAgcmjP4HFE71S9U9hBzR7ibPrsRgwJEEM3jyPxBt9OPOR8piaGJNFmvA/0?wx_fmt=png)
+
 
 ## 系统调用意义
 * 避免了用户直接对底层硬件进行编程。比如最简单的`hello world`程序是将信息打印到终端，终端对系统来说是硬件资源，如果没有系统调用，用户程序需要自己编写终端设备的驱动，以及控制终端如何显示的代码。
@@ -61,9 +63,11 @@ int main()
            t->tm_hour, t->tm_min, t->tm_sec);
 }
 
-[root@host ~]# gcc a.c -oa && ./a
+[linuxblogs@host ~]$ gcc a.c -oa && ./a
 Time: 2018-05-06 03:23:46
 ```
 
 首先通过 `mov $0xd %%eax` 来将系统调用放入 `%eax` 寄存器中，time() 的系统调用号是 13，然后执行 `int $0x80` 系统就会去执行 time() 这个系统调用了。其实代码中的汇编部分就是实现 time() 系统调用的功能，汇编代码不懂没关系（我也不太懂），这里主要是为了说清楚系统调用的整个过程。
 
+### 欢迎关注公众号: 「linuxblogs」
+![微信二维码](https://mmbiz.qpic.cn/mmbiz_jpg/yVibDjicRT1VsV0RH8KV6zMUhvJIajBDGibNAM19nKibia5Ae59EOnic3MJNrhJYdXOPqpVLXAvnr4ICAaZTBhW1JUxA/0?wx_fmt=jpeg)
