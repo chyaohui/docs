@@ -16,8 +16,30 @@
 ## 1. 零基础启蒙
 
 ### 产生兴趣
-* 书籍《与孩子一起学编程》。这是一本老少咸宜的编程书。
+* 书籍《[与孩子一起学编程](https://book.douban.com/subject/5338024/)》。这是一本老少咸宜的编程书。
 * 在线教程《[MDN的web开发入门](https://developer.mozilla.org/zh-CN/docs/learn)》可以认为是web方面的官方技术网站。
+
+### 入门语言Python
+
+* 书籍《[Python编程快速上手](https://book.douban.com/subject/26836700/)》
+* 书籍《[Python编程：从入门到实践](https://book.douban.com/subject/26829016/)》
+* 书籍《[Python Cookbook 中文版](https://book.douban.com/subject/26381341/)》
+* 书籍《[流畅的Python](https://book.douban.com/subject/27028517/)》
+
+### 入门语言JavaScript
+* 在线教程《[MDN JavaScript教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)》。可以认为这是最权威的JavaScript官方教程，非常全。
+* 在线教程《[W3School JavaScript教程](http://www.w3school.com.cn/js/)》
+* 在线教程《[JavaScript全栈教程（廖雪峰）](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)》
+
+### 操作系统入门
+* Linux
+
+### 编程工具
+* Visual Studio Code
+* [中文教程文档(翻译)](https://legacy.gitbook.com/book/jeasonstudio/vscode-cn-doc/details)
+
+### Web编程入门
+
 
 
 
