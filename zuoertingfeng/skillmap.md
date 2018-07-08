@@ -41,7 +41,7 @@
 ### 1.6 Web编程入门
 > 在第三次工业革命的信息化浪潮中，Web 互联网是其中最大的发明，所以这是任何一个程序员都不能错过的。
 
-**学习方向**:
+**学习方向：**
 * 前端基础：CSS、HTML、JavaScript
   - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
   - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
@@ -52,7 +52,7 @@
   - Python
   - Node.js
 
-**学习要点**
+**学习要点：**
 * 学习 HTML 基本语法
 * 学习 CSS 如何选中 HTML 元素并应用一些基本样式
 * 学会 Firefox + Firebug 或 Chrome 查看你觉得很炫的网页结构，并动态修改
@@ -73,7 +73,7 @@
 * 图片验证码
 * 上传图片
 * 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
-* 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php) [微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
+* 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
 
 
