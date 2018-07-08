@@ -41,8 +41,7 @@
 ### Web编程入门
 > 在第三次工业革命的信息化浪潮中，Web 互联网是其中最大的发明，所以这是任何一个程序员都不能错过的。
 
-学习方向
----------
+**学习方向**:
 * 前端基础：CSS、HTML、JavaScript
   - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
   - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
@@ -53,15 +52,28 @@
   - Python
   - Node.js
 
-学习要点
----
-
+**学习要点**
+* 学习 HTML 基本语法
+* 学习 CSS 如何选中 HTML 元素并应用一些基本样式
+* 学会 Firefox + Firebug 或 Chrome 查看你觉得很炫的网页结构，并动态修改
+* 在一台 Linux 机器上配置 LNMP - Ubuntu/Nginx/PHP/MySQL
+* 学习 PHP，让后台 PHP 和前台 HTML 进行数据交互，对服务器响应浏览器请求形成初步认识。
+* 实现一个表单提交和反显的功能
+* 把 PHP 连接本地或远程数据库 MySQL
 
 
 ### 实践项目
-
-
-
+无论使用 Python，还是 Node.js，还是 PHP，最好能做一个非常简单的 Blog 系统，或 BBS 系统，需要支持如下功能：
+* 用户登录和注册(不需要密码找回)
+* 用户发帖(不需要支持富文本，只需要支持纯文本)
+* 用户评论(不需要支持富文本，只需要支持纯文本)
+* 用户登录时密码不应该保存为明文，应该用 MD5 + Salt 来保存
+* 用户登录后，对于用户自己的帖子可以有`重新编辑`或`删除`的功能，但是无权编辑或删除其它用户的帖子
+* 数据库的设计，需要三张表：用户表、文章表和评论表，他们之间是怎么关联的？
+* 图片验证码
+* 上传图片
+* 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
+* 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php) [微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
 
 
