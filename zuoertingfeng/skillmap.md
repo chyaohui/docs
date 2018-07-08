@@ -42,7 +42,7 @@
 > 在第三次工业革命的信息化浪潮中，Web 互联网是其中最大的发明，所以这是任何一个程序员都不能错过的。
 
 学习方向
----
+---------
 * 前端基础：CSS、HTML、JavaScript
   - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
   - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
