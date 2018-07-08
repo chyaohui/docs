@@ -15,30 +15,30 @@
 # 一、入门篇
 ## 1. 零基础启蒙
 
-### 产生兴趣
+### 1.1 产生兴趣
 * 书籍《[与孩子一起学编程](https://book.douban.com/subject/5338024/)》。这是一本老少咸宜的编程书。
 * 在线教程《[MDN的web开发入门](https://developer.mozilla.org/zh-CN/docs/learn)》可以认为是web方面的官方技术网站。
 
-### 入门语言Python
+### 1.2 入门语言Python
 
 * 书籍《[Python编程快速上手](https://book.douban.com/subject/26836700/)》
 * 书籍《[Python编程：从入门到实践](https://book.douban.com/subject/26829016/)》
 * 书籍《[Python Cookbook 中文版](https://book.douban.com/subject/26381341/)》
 * 书籍《[流畅的Python](https://book.douban.com/subject/27028517/)》
 
-### 入门语言JavaScript
+### 1.3 入门语言JavaScript
 * 在线教程《[MDN JavaScript教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)》。可以认为这是最权威的JavaScript官方教程，非常全。
 * 在线教程《[W3School JavaScript教程](http://www.w3school.com.cn/js/)》
 * 在线教程《[JavaScript全栈教程（廖雪峰）](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)》
 
-### 操作系统入门
+### 1.4 操作系统入门
 * Linux
 
-### 编程工具
+### 1.5 编程工具
 * Visual Studio Code
 * [中文教程文档(翻译)](https://legacy.gitbook.com/book/jeasonstudio/vscode-cn-doc/details)
 
-### Web编程入门
+### 1.6 Web编程入门
 > 在第三次工业革命的信息化浪潮中，Web 互联网是其中最大的发明，所以这是任何一个程序员都不能错过的。
 
 **学习方向**:
@@ -62,7 +62,7 @@
 * 把 PHP 连接本地或远程数据库 MySQL
 
 
-### 实践项目
+### 1.7 实践项目
 无论使用 Python，还是 Node.js，还是 PHP，最好能做一个非常简单的 Blog 系统，或 BBS 系统，需要支持如下功能：
 * 用户登录和注册(不需要密码找回)
 * 用户发帖(不需要支持富文本，只需要支持纯文本)
