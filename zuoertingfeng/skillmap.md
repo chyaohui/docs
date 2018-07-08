@@ -39,6 +39,26 @@
 * [中文教程文档(翻译)](https://legacy.gitbook.com/book/jeasonstudio/vscode-cn-doc/details)
 
 ### Web编程入门
+> 在第三次工业革命的信息化浪潮中，Web 互联网是其中最大的发明，所以这是任何一个程序员都不能错过的。
+
+学习方向
+---
+* 前端基础：CSS、HTML、JavaScript
+  - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
+  - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
+  - 注：并非学习文档所有内容，而是了解CSS和HTML是怎么相互作用来展示数据
+  - 简单学习使用JavaScript操纵HTML元件。
+  - [理解DOM和动态网页](http://www.w3school.com.cn/htmldom/index.asp)
+* 后端基础
+  - Python
+  - Node.js
+
+学习要点
+---
+
+
+
+### 实践项目
 
 
 
