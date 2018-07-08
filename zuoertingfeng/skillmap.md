@@ -1,6 +1,8 @@
 目录
 ---
 * [入门篇](#rumenpian)
+  - 零基础启蒙
+  - 正式入门
 * [修养篇](#xiuyangpian)
 * [专业基础篇](#zhuanyejichupian)
 * [软件设计篇](#ruanjianshejipian)
