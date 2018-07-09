@@ -5,7 +5,11 @@
   - 正式入门
 * [修养篇](#xiuyangpian)
 * [专业基础篇](#zhuanyejichupian)
+  - 编程语言
+  - 理论学科
+  - 系统知识
 * [软件设计篇](#ruanjianshejipian)
+  - 软件设计
 * [高手成长篇](#gaoshouchengzhangpian)
 
 
