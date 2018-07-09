@@ -78,9 +78,19 @@
 * 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
 
-
 ## 2. 正式入门
-
+* 编程技巧方面，推荐书籍《代码大全》。好书和不好的书最大的不一样是，好的书在你不同的阶段来读，你会有不同的收获，而且还会产生更多的深层次的思考。
+* 操作系统方面，推荐书籍《鸟哥的Linux私房菜》
+* 网络协议，推荐在线教程《MDN的HTTP文档》
+  - HTTP头
+  - HTTP的请求方法
+  - HTTP的返回码
+  - HTTP的Cookie、缓存、会话、连接管理等
+* 数据库设计 - 推荐慕课网的在线课程《数据库设计的那些事》；书籍推荐《MySQL必知必会》
+* 前端方面
+  - 和JavaScript相关的jQuery
+  - 和CSS相关的Bootstrap
+* 字符编码方面
 
 
 <a id='xiuyangpian'/>
