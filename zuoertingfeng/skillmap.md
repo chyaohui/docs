@@ -125,7 +125,33 @@
 <a id='zhuanyejichupian'/>
 
 # 三、专业基础篇
+## 1. 编程语言
+**Java语言：**
 
+* 推荐书籍《[Java 核心技术：卷 1 基础知识](https://book.douban.com/subject/26880667/)》
+* 推荐书籍《[Spring 实战](https://book.douban.com/subject/26767354/)》
+* 推荐书籍《[Spring Boot 实战](https://book.douban.com/subject/26857423/)》
+* 推荐书籍《[Java 并发编程实战](https://book.douban.com/subject/10484692/)》
+* 推荐书籍《[Java 性能权威指南](https://book.douban.com/subject/26740520/)》
+* 推荐书籍《[深入理解 Java 虚拟机](https://book.douban.com/subject/24722612/)》
+* 推荐书籍《[Java 编程思想](https://book.douban.com/subject/2130190/)》
+* 推荐书籍《[精通 Spring 4.x](https://book.douban.com/subject/26952826/)》
+* 推荐书籍《[设计模式](https://book.douban.com/subject/1052241/)》
+
+
+**C/C++ 语言：**
+* 推荐书籍《[C 程序设计语言](https://book.douban.com/subject/1139336/)》
+* 推荐书籍《[C 语言程序设计现代方法](https://book.douban.com/subject/2280547/)》
+* 推荐书籍《[C 陷阱与缺陷](https://book.douban.com/subject/2778632/)》
+* 推荐书籍《[C++ Primer 中文版](https://book.douban.com/subject/25708312/)》
+* 推荐书籍《[深度探索 C++ 对象模型](https://book.douban.com/subject/10427315/)》
+* 推荐文章《[C++ 虚函数表解析](https://coolshell.cn/articles/12165.html)》
+* 推荐文章《[C++ 对象内存布局](https://coolshell.cn/articles/12176.html)》
+* 推荐文章《[C++ 的坑真的多吗](https://coolshell.cn/articles/7992.html)》
+
+**学习 Go 语言：**
+* 推荐文章《[GO 语言简介（上）- 语法](https://coolshell.cn/articles/8460.html)》
+* 推荐文章《[GO 语言简介（下）- 特性](https://coolshell.cn/articles/8489.html)》
 
 
 <a id='ruanjianshejipian'/>
