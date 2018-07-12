@@ -171,6 +171,39 @@
 * 推荐书籍《[计算机程序的构造与解释]》
 * 推荐书籍《[编译原理]》
 
+
+## 3. 系统知识
+
+* 必读书籍《[深入理解计算机系统]》
+* 三部经典书《Unix 环境高级编程》
+* 三部经典书《Unix 网络编程》《第 1 卷 套接口 API》《第 2 卷 进程间通信》
+* 三部经典书《TCP/IP 详解 卷1协议》
+
+如果你觉得上面这几本经典书比较难啃，你可以试试下面这些通俗易懂的。
+* 《Linux C 编程一站式学习》
+* 《TCP/IP 网络编程》
+* 《图解 TCP/IP》
+* 《Wireshark 数据包分析实战》
+* 《Linux/Unix 系统编程手册》
+* 《Linux 系统编程》
+
+关于 TCP 的东西，你还可以看看下面这一系列的文章
+* [Let's code a TCP/IP stack, 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
+* [Let's code a TCP/IP stack, 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)
+* [Let's code a TCP/IP stack, 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)
+* [Let's code a TCP/IP stack, 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)
+* [Let's code a TCP/IP stack, 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/
+
+对于系统知识，我认为主要有以下一些学习要点：
+* 用这些系统知识操作一下文件系统，实现一个可以拷贝目录树的小程序。
+* 用 fork / wait / waitpid 写一个多进程的程序，用 pthread 写一个多线程带同步或互斥的程序。比如，多进程购票的程序。
+* 用 signal / kill / raise / alarm / pause / sigprocmask 实现一个多进程间的信号量通信的程序。
+* 学会使用 gcc 和 gdb 来编程和调试程序（参看我的《用 gdb 调试程序》[一](https://blog.csdn.net/haoel/article/details/2879)、[二](https://blog.csdn.net/haoel/article/details/2880)、[三](https://blog.csdn.net/haoel/article/details/2881)、[四](https://blog.csdn.net/haoel/article/details/2882)、[五](https://blog.csdn.net/haoel/article/details/2883)、[六](https://blog.csdn.net/haoel/article/details/2884)、[七](https://blog.csdn.net/haoel/article/details/2885)）。
+* 学会使用 makefile 来编译程序（参看我的《跟我一起写 makefile》[一](https://blog.csdn.net/haoel/article/details/2886)、[二](https://blog.csdn.net/haoel/article/details/2887)、[三](https://blog.csdn.net/haoel/article/details/2888)、[四](https://blog.csdn.net/haoel/article/details/2889)、[五](https://blog.csdn.net/haoel/article/details/2890)、[六](https://blog.csdn.net/haoel/article/details/2891)、[七](https://blog.csdn.net/haoel/article/details/2892)、[八](https://blog.csdn.net/haoel/article/details/2893)、[九](https://blog.csdn.net/haoel/article/details/2894)、[十](https://blog.csdn.net/haoel/article/details/2895)、[十一](https://blog.csdn.net/haoel/article/details/2896)、[十二](https://blog.csdn.net/haoel/article/details/2897)、[十三](https://blog.csdn.net/haoel/article/details/2898)、[十四](https://blog.csdn.net/haoel/article/details/2899)）。
+* Socket 的进程间通信。用 C 语言写一个 1 对 1 的聊天小程序，或是一个简单的 HTTP 服务器。
+
+
+
 <a id='ruanjianshejipian'/>
 
 # 四、软件设计篇
