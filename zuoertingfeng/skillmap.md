@@ -113,11 +113,12 @@
 * 最后一个，提高问问题的能力
 
 ## 2. 写代码的修养
-除了《代码大全》外，还需要补充一些如何写好代码的知识，推荐如下书籍：
-* 《重构：改善既有代码的设计》
-* 《修改代码的艺术》
-* 《代码整洁之道》
-* 《程序员的职业素养》
+除了《代码大全》外，还需要补充一些如何写好代码的知识，推荐如下：
+* 推荐文章资料《[提问的智慧](http://doc.zengrong.net/smart-questions/cn.html)》
+* 推荐书籍《[重构：改善既有代码的设计](https://book.douban.com/subject/4262627/)》
+* 推荐书籍《[修改代码的艺术](https://book.douban.com/subject/2248759/)》
+* 推荐书籍《[代码整洁之道](https://book.douban.com/subject/4199741/)》
+* 推荐书籍《[程序员的职业素养](https://book.douban.com/subject/11614538/)》
 * Code Review ()
 * Unit Test，推荐《完美软件：对软件测试的各种幻想》&《Google 软件测试之道》
 
