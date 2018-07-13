@@ -174,27 +174,27 @@
 
 ## 3. 系统知识
 
-* 必读书籍《[深入理解计算机系统]》
-* 三部经典书《Unix 环境高级编程》
-* 三部经典书《Unix 网络编程》《第 1 卷 套接口 API》《第 2 卷 进程间通信》
-* 三部经典书《TCP/IP 详解 卷1协议》
+* 必读书籍《[深入理解计算机系统](https://book.douban.com/subject/5333562/)》
+* ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《[Unix 环境高级编程](https://book.douban.com/subject/1788421/)》
+* ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《Unix 网络编程》 [第 1 卷 套接口 API](https://book.douban.com/subject/1500149/)、[第 2 卷 进程间通信](https://book.douban.com/subject/4118577/)
+* ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《[TCP/IP 详解 卷1协议](https://book.douban.com/subject/1088054/)》 - 必读书籍
 
-如果你觉得上面这几本经典书比较难啃，你可以试试下面这些通俗易懂的。
-* 《Linux C 编程一站式学习》
-* 《TCP/IP 网络编程》
-* 《图解 TCP/IP》
-* 《Wireshark 数据包分析实战》
-* 《Linux/Unix 系统编程手册》
-* 《Linux 系统编程》
+如果觉得上面这几本经典书比较难啃，可以试试下面这些通俗易懂的(可以先看下面几本)。
+* 推荐书籍《[Linux C 编程一站式学习](https://book.douban.com/subject/4141733/)》，看过。
+* 推荐书籍《[TCP/IP 网络编程](https://book.douban.com/subject/25911735/)》
+* 推荐书籍《[图解 TCP/IP](https://book.douban.com/subject/24737674/)》，看过，有图有真相。
+* 推荐书籍《[Wireshark 数据包分析实战](https://book.douban.com/subject/21691692/)》，已有书籍。
+* 推荐书籍《[Linux/Unix 系统编程手册](https://book.douban.com/subject/25809330/)》
+* 推荐书籍《[Linux 系统编程](https://book.douban.com/subject/25828773/)》
 
-关于 TCP 的东西，你还可以看看下面这一系列的文章
+关于 TCP 的东西，还可以看看下面这一系列的文章：
 * [Let's code a TCP/IP stack, 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
 * [Let's code a TCP/IP stack, 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)
 * [Let's code a TCP/IP stack, 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)
 * [Let's code a TCP/IP stack, 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)
 * [Let's code a TCP/IP stack, 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)
 
-对于系统知识，我认为主要有以下一些学习要点：
+对于系统知识，主要有以下一些学习要点：
 * 用这些系统知识操作一下文件系统，实现一个可以拷贝目录树的小程序。
 * 用 fork / wait / waitpid 写一个多进程的程序，用 pthread 写一个多线程带同步或互斥的程序。比如，多进程购票的程序。
 * 用 signal / kill / raise / alarm / pause / sigprocmask 实现一个多进程间的信号量通信的程序。
