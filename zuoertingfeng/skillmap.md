@@ -157,19 +157,19 @@
 ## 2. 理论学科
 **数据结构与算法：**
 > 算法是比较难学习的，而且学习 `算法` 是需要智商的。数组、链表、哈希表、二叉树、排序算法等一些基础知识，对大多数人来说是没什么问题的。但是一旦进入到路径规划、背包问题、字符串匹配、动态规划、递归遍历等一些比较复杂的问题上，就会让很多人跟不上了，不但跟不上，而且还会非常痛苦。是的，解决算法问题的确是可以区分人类智商的一个比较好的方式，这也是为什么好些公司用算法题当面试题来找到智商比较高的程序员。
-* 基础知识，推荐书籍《算法》、《算法图解》
-* 理论加持，推荐书籍《算法导论》
-* 思维改善，推荐书籍《编程珠玑》
+* 基础知识，推荐书籍《[算法](https://book.douban.com/subject/10432347/)》、《[算法图解](https://book.douban.com/subject/26979890/)》
+* 理论加持，推荐书籍《[算法导论](https://book.douban.com/subject/20432061/)》
+* 思维改善，推荐书籍《[编程珠玑](https://book.douban.com/subject/3227098/)》
 * 基础算法题，推荐资料《[LeetCode](https://leetcode.com/)》
 * 编程题，推荐资料《[陈皓的 Github](https://github.com/haoel/leetcode)》
 
 **其它理论基础知识：**
-* 推荐书籍《[数据结构与算法分析]》
-* 推荐书籍《[数据库系统概念]》
-* 推荐书籍《[现代操作系统]》
-* 推荐书籍《[计算机网络]》
-* 推荐书籍《[计算机程序的构造与解释]》
-* 推荐书籍《[编译原理]》
+* 推荐书籍《[数据结构与算法分析](https://book.douban.com/subject/1139426/)》
+* 推荐书籍《[数据库系统概念](https://book.douban.com/subject/1929984/)》
+* 推荐书籍《[现代操作系统](https://book.douban.com/subject/3852290/)》
+* 推荐书籍《[计算机网络](https://book.douban.com/subject/1391207/)》
+* 推荐书籍《[计算机程序的构造与解释](https://book.douban.com/subject/1148282/)》
+* 推荐书籍《[编译原理](https://book.douban.com/subject/3296317/)》
 
 
 ## 3. 系统知识
@@ -205,6 +205,9 @@
 **C10K 问题**
 > 学习完《Unix 网络编程》后，一定(是时候)要研究一下`C10K`了，读一下 "[C10K Problem](http://www.kegel.com/c10k.html) ([中文翻译版](https://www.oschina.net/translate/c10k))"。C10K 问题本质上是操作系统处理大并发请求的问题。对于 Web 时代的操作系统而言，对于客户端过来的大量的并发请求，需要创建相应的服务进程或线程。这些进程或线程多了，导致数据拷贝频繁（缓存 I/O、内核将数据拷贝到用户进程空间、阻塞）， 进程 / 线程上下文切换消耗大，从而导致资源被耗尽而崩溃。这就是 C10K 问题的本质。了解这个问题，并了解操作系统是如何通过多路复用的技术来解决这个问题的，有助于你了解各
 种 I/O 和异步模型。现在，整个世界都在解决`C10M`问题，推荐阅读 "[The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)"
+
+* 推荐文章资料：《[C10K问题系列文章](http://www.52im.net/thread-561-1-1.html)》
+
 
 **实践项目**
 
