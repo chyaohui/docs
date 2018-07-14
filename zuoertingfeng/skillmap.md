@@ -83,18 +83,47 @@
 
 
 ## 2. 正式入门
-* 编程技巧方面，推荐书籍《代码大全》。好书和不好的书最大的不一样是，好的书在你不同的阶段来读，你会有不同的收获，而且还会产生更多的深层次的思考。
-* 操作系统方面，推荐书籍《鸟哥的Linux私房菜》
-* 网络协议，推荐在线教程《MDN的HTTP文档》
+**编程技能**
+
+* 编程技巧方面，推荐书籍《[代码大全](https://book.douban.com/subject/1477390/)》。好书和不好的书最大的不一样是，好的书在你不同的阶段来读，你会有不同的收获，而且还会产生更多的深层次的思考。
+* 操作系统方面，推荐书籍《[鸟哥的Linux私房菜](https://book.douban.com/subject/4889838/)》
+* 网络协议，推荐在线教程《[MDN的HTTP文档](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)》
   - HTTP头
   - HTTP的请求方法
   - HTTP的返回码
   - HTTP的Cookie、缓存、会话、连接管理等
-* 数据库设计 - 推荐慕课网的在线课程《数据库设计的那些事》；书籍推荐《MySQL必知必会》
+* 数据库设计 - 推荐慕课网的在线课程《[数据库设计的那些事](https://www.imooc.com/learn/117)》；书籍推荐《[MySQL必知必会](https://book.douban.com/subject/3354490/)》
 * 前端方面
-  - 和JavaScript相关的jQuery
-  - 和CSS相关的Bootstrap
-* 字符编码方面
+  - 和JavaScript相关的[jQuery](https://jquery.com/)
+  - 和CSS相关的[Bootstrap](https://getbootstrap.com/)
+* 字符编码方面，推荐文章《[关于字符编码，你所需要知道的](http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html)》
+
+
+**编程工具**
+
+* 编程的IDE。传统的 Eclipse [教程](http://www.runoob.com/eclipse/eclipse-tutorial.html)；时髦的 Visual Studio Code [教程](https://www.gitbook.com/book/jeasonstudio/vscode-cn-doc/details)
+* 版本管理工具。学习 Git 就好了，推荐教程[Pro Git 第二版](https://git-scm.com/book/zh/v2/)，备选[猴子都能懂得 Git 入门](https://backlog.com/git-tutorial/cn/)，然后学会使用 Github。关于 Git 环境安装和准备以及 Github 使用 [Github and Git 图文教程](https://github.com/JiapengLi/GitTutorial)或[Git 图文教程及详解](https://www.jianshu.com/p/1b65ed31da97)
+* 调试前端程序。学会使用 Chrome 调试前端程序，推荐教程[超完整的 Chrome 浏览器客户端调试大全](http://www.igeekbar.com/igeekbar/post/156.htm)
+* 数据库设计工具。需要学会使用 MySQL WorkBench，相关手册[官方文档](https://dev.mysql.com/doc/refman/5.7/en/)
+
+
+**实践项目**
+这次需要设计一个投票系统的项目，业务上的需求如下：
+* 用户只有在登录后，才可以生成投票表单
+* 投票项可以单选，可以多选
+* 其它用户投票后显示当前投票结果(但不能刷票)
+* 投票有相应的时间，页面上需要出现倒计时
+* 投票结果需要用不同颜色不同长度的横条，并显示百分比和人数
+
+技术上的需求如下：
+* 这回要用 Java Spring Boot 来实现了，然后，后端不返回任何的 HTML，只返回 JSON 数据给前端
+* 由前端的 JQuery 来处理并操作相关的 HTML 动态生成在前端展示的页面
+* 前端的页面还要是响应式的，也就是可以在手机端和电脑端有不同的呈现，可以用 Bootstrap 来完成
+
+如果有兴趣，还可以挑战以下这些功能：
+* 在微信中，通过微信授权后记录用户信息，以防止刷票
+* 可以不用刷页面，就可以动态地看到投票结果的变化
+* Google 一些画图表的 JavaScript 库，然后把图片表得风骚一些
 
 
 <a id='xiuyangpian'/>
