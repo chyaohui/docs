@@ -1,13 +1,13 @@
 目录
 ---
 * [入门篇](#rumenpian)
-  - 零基础启蒙
-  - 正式入门
+  - [零基础启蒙](#lingjichurumen)
+  - [正式入门](#zhengshirumen)
 * [修养篇](#xiuyangpian)
 * [专业基础篇](#zhuanyejichupian)
-  - 编程语言
-  - 理论学科
-  - 系统知识
+  - [编程语言](#bianchengyuyan)
+  - [理论学科](#lilunxueke)
+  - [系统知识](#xitongzhishi)
 * [软件设计篇](#ruanjianshejipian)
   - 软件设计
 * [高手成长篇](#gaoshouchengzhangpian)
@@ -19,6 +19,9 @@
 <a id='rumenpian'/>
 
 # 一、入门篇
+
+<a id='lingjichuqimeng'/>
+
 ## 1. 零基础启蒙
 
 ### 1.1 产生兴趣
@@ -81,6 +84,7 @@
 * 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
 * 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
+<a id='zhengshirumen'/>
 
 ## 2. 正式入门
 **编程技能**
@@ -130,7 +134,10 @@
 <a id='xiuyangpian'/>
 
 # 二、修养篇
-## 1. 英语能力
+
+<a id='yingyunengli'/>
+
+### 1. 英语能力
 * 坚持 Google 英文关键词，而不是在 Google 里搜中文。
 * 在 Github 上只用英文。
 * 用英文写代码注释
@@ -142,7 +149,9 @@
 * 坚持用英文的教材而不是中文的
 * 最后一个，提高问问题的能力
 
-## 2. 写代码的修养
+<a id='xiedaimadexiuyang'/>
+
+### 2. 写代码的修养
 除了《代码大全》外，还需要补充一些如何写好代码的知识，推荐如下：
 * 推荐文章资料《[提问的智慧](http://doc.zengrong.net/smart-questions/cn.html)》
 * 推荐书籍《[重构：改善既有代码的设计](https://book.douban.com/subject/4262627/)》
@@ -150,12 +159,15 @@
 * 推荐书籍《[代码整洁之道](https://book.douban.com/subject/4199741/)》
 * 推荐书籍《[程序员的职业素养](https://book.douban.com/subject/11614538/)》
 * Code Review ()
-* Unit Test，推荐《完美软件：对软件测试的各种幻想》&《Google 软件测试之道》
+* Unit Test，推荐《[完美软件：对软件测试的各种幻想](https://book.douban.com/subject/4187479/)》&《[Google 软件测试之道](https://book.douban.com/subject/27187576/)》
 
 
 <a id='zhuanyejichupian'/>
 
 # 三、专业基础篇
+
+<a id='bianchengyuyan'/>
+
 ## 1. 编程语言
 **Java语言：**
 
@@ -184,6 +196,7 @@
 * 推荐文章《[GO 语言简介（上）- 语法](https://coolshell.cn/articles/8460.html)》
 * 推荐文章《[GO 语言简介（下）- 特性](https://coolshell.cn/articles/8489.html)》
 
+<a id='lilunxueke'/>
 
 ## 2. 理论学科
 **数据结构与算法：**
@@ -202,6 +215,7 @@
 * 推荐书籍《[计算机程序的构造与解释](https://book.douban.com/subject/1148282/)》
 * 推荐书籍《[编译原理](https://book.douban.com/subject/3296317/)》
 
+<a id='xitongzhishi'/>
 
 ## 3. 系统知识
 
