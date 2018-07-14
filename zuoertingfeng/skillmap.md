@@ -286,13 +286,91 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * 其它方向：安全开发、运维开发、嵌入式开发
 
 
-
-
-
 <a id='ruanjianshejipian'/>
 
 # 四、软件设计篇
 
+> 学习软件设计的方法、理念、范式和模式，是让你从一个程序员通向工程师的必备技能。Linus 说过，这世界程序员之所有高下之分，最大的区别就是程序员的「品味」不一样。而软件设计这件事情，需要自己用实践、用时间、用错误、用教训、用痛苦才能真正体会其中的精髓。除了理论知识外，还需要大量的工程实践，需要有足够的耐心和恒心。
+
+### 编程范式
+学习编程范式可以让你明白编程的本质和各种语言的编程方式。
+* 陈皓(左耳朵耗子)在极客时间写的《编程范式游记》系列文章，目录如下：
+  - [编程范式游记(1) - 起源](https://time.geekbang.org/column/article/301)
+  - [编程范式游记(2) - 泛型编程](https://time.geekbang.org/column/article/303)
+  - [编程范式游记(3) - 类型系统和泛型的本质](https://time.geekbang.org/column/article/2017)
+  - [编程范式游记(4) - 函数式编程](https://time.geekbang.org/column/article/2711)
+  - [编程范式游记(5) - 修饰器模式](https://time.geekbang.org/column/article/2723)
+  - [编程范式游记(6) - 面向对象编程](https://time.geekbang.org/column/article/2729)
+  - [编程范式游记(7) - 基于原型的编程范式](https://time.geekbang.org/column/article/2741)
+  - [编程范式游记(8) - Go 语言的委托模式](https://time.geekbang.org/column/article/2748)
+  - [编程范式游记(9) - 编程的本质](https://time.geekbang.org/column/article/2751)
+  - [编程范式游记(10) - 逻辑编程范式](https://time.geekbang.org/column/article/2752)
+  - [编程范式游记(11) - 程序世界里的编程范式](https://time.geekbang.org/column/article/2754)
+* [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)，顺着页面看下去，很多有用的编程相关知识
+* [六个编程范型将改变你对编程的看法](https://my.oschina.net/editorial-story/blog/890965) - ([英文版](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/))，文章讲了 6 种不太常见的编程范式，并结合一些没怎么听过的语言来分别进行描述
+  - 默认支持并发 (Concurrent by default)
+  - 依赖类型 (Dependent types)
+  - 连接性语言 (Concatenative languages)
+  - 声明式编程 (Declarative programming)
+  - 符号式编程 (Symbolic programming)
+  - 基于知识的编程 (Knowledge-based programming)
+* [Programming Paradigms for Dummies: What Every Programmer Should Know](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
+* [斯坦福大学公开课：编程范式](http://open.163.com/special/opencourse/paradigms.html)
+
+### 一些软件设计的相关原则
+* [Don't Repeat Yourself](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself)，DRY 是一个最简单的法则，也最容易被理解的，但也可能是最难被应用的(因为要做这样，我们需要在范型设计上相当努力，这并不是一件容易的事)。它意味着，当在两个或多个地方发现一些相似的代码的时候，我们需要把它们的共性抽象出来形成一个唯一的新方法，并且改变现有地方的代码让它们以一些合适的参数调用这个新的方法。
+* [Keep It Simple, Stupid(KISS)](http://en.wikipedia.org/wiki/KISS_principle)
+* Program to an interface, not an implementation。
+  - 这是设计模式中最根本的哲学，注重接口，而不是实现，依赖接口，而不是实现。
+  - 接口是抽象是稳定的，实现则是多种多样的。
+  - 在面向对象的 `S.O.L.I.D` 原则中会提到我们的依赖倒置原则，就是这个原则的另一种样子。
+  - 还有一条原则叫 Composition over inheritance (喜欢组合而不是继承)
+* [You Ain't Gonna Need It(YAGNI)](http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It)
+  - 这个原则简而言之为 -- 只考虑和设计必须的功能，避免过度设计。
+  - 只实现目前需要的功能，在以后你需要更多功能时，可以再进行添加。
+  - 如无必要，勿增复杂性。软件开发是一场 trade-off 的博弈。
+* [Law of Demeter](http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge)，迪米特法则，又称 "最少知识原则" ，对于对象 "O" 中一个方法 "M" ，"M" 应该只能够访问以下对象中的方法：
+  - 对象 "O"
+  - 与 "O" 直接相关的 Component Object
+  - 由方法 "M" 创建或实例化的对象
+  - 作为方法 "M" 的参数的对象
+* [面向对象的 S.O.L.I.D 原则](https://en.wikipedia.org/wiki/Solid_objectoriented_design)
+  - SRP(Single Responsibility Principle)职责单一原则。核心思想是：一个类，只做一件事，并把这件事做好，其只有一个引起它变化的原因。职责过多，可能引起它变化的原因就越多，这将导致职责依赖，相互之间就产生影响，从而极大地损伤其内聚性和耦合度。
+  - OCP(Open/Closed Principle) - 开闭原则。其核心思想是：模块是可扩展的，而不可修改的。也就是说，对扩展是开放的，而对修改是封闭的。对扩展开放，意味着有新的需求或变化时，可以对现有代码进行扩展，以适应新的情况。对修改封闭，意味着类一旦设计完成，就k可以独立完成其工作，而不要对类进行任何修改。
+  - LSP(Liskov substitution principle) - 里氏代换原则。子类必须能够替换成它们的基类，即子类应该可以替换任何基类能够出现的地方，且经过替换后，代码还能正常工作。另，不应该在代码中出现 `if/else` 之类对子类类型进行判断的条件。正是由于子类型的可替换性才使得父类型的模块在无需修改的情况下就可以扩展
+  - ISP(Interface Segregation Principle) - 接口隔离原则。接口隔离原则的意思是把功能实现在接口中，而不是类中，使用多个专门的接口比使用单一的总接口要好。
+  - DIP(Dependency Inversion Principle) - 依赖倒置原则。高层模块不应该依赖于底层模块的实现，而是依赖于高层抽象。
+* [CCP](http://c2.com/cgi/wiki?CommonClosurePrinciple)(Common Closure Principle) - 共同封闭原则。
+* [CRP](http://c2.com/cgi/wiki?CommonReusePrinciple)(Common Reuse Principle) - 共同重用原则。
+* [好莱坞原则](http://en.wikipedia.org/wiki/Hollywood_Principle) - Hollywood Principle
+* [高内聚，低耦合](http://en.wikipedia.org/wiki/Coupling_computer_science)。把模块间的耦合降到最低，而努力让一个模块做到精益求精。内聚，指一个模块内各个元素彼此结合的紧密程度；耦合指一个软件结构内不同模块之间互连程度的度量。内聚意味着重用和独立，耦合意味着多米诺效应--牵一发动全身。
+* [CoC](http://en.wikipedia.org/wiki/Convention_over_Configuration) - 惯例优于配置原则。简单点说就是将一些公认的配置方式和信息作为内部缺省的规则来使用。
+* [SoC](http://sulong.me/archives/99) - 关注点分离。就是在软件开发中，通过各种手段，将问题的各个关注点分开。如果一个问题能分解为独立且较小的问题，就是相对较易解决的。
+* [Dbc](http://en.wikipedia.org/wiki/Design_by_contract) - 契约式设计。
+* [ADP](http://c2.com/cgi/wiki?AcyclicDependenciesPrinciple) - 无环依赖原则。包(或服务)之间的依赖结构必须是一个直接的无环图形，也就是说不允许出现循环依赖。
+
+### 一些软件设计的读物
+* 《[领域驱动设计](https://book.douban.com/subject/26819666/)》
+* 《[UNIX 编程艺术](https://book.douban.com/subject/1467587/)》
+* 《[Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)》
+* [The Twelve-Factor App](https://12factor.net/)，[中文版](https://12factor.net/zh_cn/) - 架构师必读
+* [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8) - 避免过度设计系统
+* [Instagram Engineering’s 3 rules to a scalable cloud application architecture](https://medium.com/@DataStax/instagram-engineerings-3-rules-to-a-scalable-cloud-application-architecture-c44afed31406)。Instagram 工程的三个黄金法则：
+  - 使用稳定可靠的技术(迎接新的结束)
+  - 不要重新发明轮子
+  - Keep it very simple
+  - 其实，Amazon 也有两条工程法则，一个是自动化，一个是简化
+* [How To Design A Good API and Why it Matters - Joshua Bloch](https://www.infoq.com/presentations/effective-api-design)，Google 的一个分享，关于如何设计好一个 API。
+* 关于 Restful API 的设计，可以学习并借鉴下面这些文章：
+  - [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+  - [Ideal REST API design](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+  - [HTTP API Design Guide](https://github.com/interagent/http-api-design)
+  - [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)
+  - [IBM Watson REST API Guidelines](https://github.com/watson-developer-cloud/api-guidelines)
+  - [Zalando RESTful API and Event Scheme Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
+* [The Problem With Logging](https://blog.codinghorror.com/the-problem-with-logging/)。关于程序打日志的短文，可以让你知道一些可能以往不知道的打日志需要注意的问题。
+* [Concurrent Programming for Scalable Web Architectures](http://berb.github.io/diploma-thesis/community/index.html)，这是一本在线的免费书，
+教你如何架构一个可扩展的高性能的网站。其中谈到了一些不错的设计方法和知识。
 
 
 <a id='gaoshouchengzhangpian'/>
