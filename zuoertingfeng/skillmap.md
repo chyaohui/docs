@@ -375,9 +375,9 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 <a id='gaoshouchengzhangpian'/>
 
 # 五、高手成长篇
-## Linux 系统、内存和网络
+## 1、Linux 系统、内存和网络
 
-### Linux 系统相关
+### 1.1 Linux 系统相关
 * [RedHat Enterprise Linux 文档](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/?version=7)
 * [Linux Insides](https://github.com/0xAX/linux-insides)。Github 上的一个开源电子书，讲述了 Linux 内核是怎样启动、初始化以及进行管理的。
 * [LWN's kernel page](https://github.com/0xAX/linux-insides)。上面很多文章来解释 Linux 内核的一些东西。
@@ -390,7 +390,7 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * [Optimizing web servers for high throughput and low latency](http://www.brendangregg.com/linuxperf.html)，非常底层的系统调优的文章。
 
 
-### 内存相关
+### 1.2 内存相关
 首先，LWN.net 系列文章 "What every programmer should know about memory" 阅读，下面是系列文章的网页版列表(完整的[PDF 文档](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf))：
 * [Part 1: (Introduction)](https://lwn.net/Articles/250967/) ，中译版为 [每个程序员都应该了解的内存知识【第一部分】](https://www.oschina.net/translate/what-every-programmer-should-know-about-memory-part1)
 * [Part 2: (CPU caches)](https://lwn.net/Articles/252125/)
@@ -420,7 +420,25 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * [Decreasing RAM Usage by 40% Using jemalloc with Python & Celery](https://zapier.com/engineering/celery-python-jemalloc/)
 
 
-### 计算机网络
+### 1.3 计算机网络
+**网络学习**
+* 推荐一本书，《[计算机网络(第5版)](https://book.douban.com/subject/10510747/)》
+* 渥汰华大学的一个课程讲议你也可以一看 [Computer Network Design](http://www.site.uottawa.ca/~shervin/courses/ceg4185/lectures/) 。
+* GeeksforGeeks 上也有一个简单的 [Computer Network Tutorials](http://www.site.uottawa.ca/~shervin/courses/ceg4185/lectures/) 。
+
+
+**网络调优**，推荐一些非常实用的可以操作的技术：
+* 《Linux 的高级路由和流量控制 HowTo》（[Linux Advanced Routing & Traffic Control HOWTO](http://lartc.org/) ），这是一个非常容易上手的关于 iproute2、流量整形和一点 netfilter 的指南。
+* 关于网络调优，你可以看一下这个文档 [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)。
+* 还有一些网络工具能够帮上你的大忙，这里有一个网络工具的 Awesome 列表 [Awesome Pcap Tools](https://github.com/caesar0301/awesome-pcaptools) ，其中罗列了各种网络工具，能够让你更从容地调试网络相关的程序。
+* [Making Linux TCP Fast](https://netdevconf.org/1.2/papers/bbr-netdev-1.2.new.new.pdf) ，一篇非常不错的 TCP 调优的论文。
+* 下面是在 PackageCloud 上的两篇关于 Linux 网络栈相关的底层文章，非常值得一读。
+  - [Monitoring and Tuning the Linux Networking Stack: Receiving Data](https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/)
+  - [Monitoring and Tuning the Linux Networking Stack: Sending Data](https://blog.packagecloud.io/eng/2017/02/06/monitoring-tuning-linux-networking-stack-sending-data/)
+
+
+
+**网络协议**
 
 
 
