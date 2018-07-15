@@ -439,13 +439,57 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 
 
 **网络协议**
+> 学习网络协议最好的方式就是学习通讯相关的 RFC，读 RFC 有几个好处，一方面可以学习技术，另一方面可以通过 RFC 学习到一个好的技术文档是怎么写的，还能看到各种解决问题的方案和思路。
+
+对于第 2 层链路层，可以需要了解一下 ARP：
+* [RFC 826 - An Ethernet Address Resolution Protocol](https://tools.ietf.org/html/rfc826)
+
+Tunnel 相关协议：
+* [RFC 1853 - IP in IP Tunneling](https://tools.ietf.org/html/rfc1853)
+* [RFC 2784 - Generic Routing Encapsulation (GRE)](https://tools.ietf.org/html/rfc2784)
+* [RFC 2661 - Layer Two Tunneling Protocol “L2TP”](https://tools.ietf.org/html/rfc2661)
+* [RFC 2637 - Point-to-Point Tunneling Protocol (PPTP)](https://tools.ietf.org/html/rfc2637)
+
+对于第 4 层，最需要了解的是 TCP/IP ，下边的 RFC 在 CoolShell 上的《[TCP 的那些事儿(上)](https://coolshell.cn/articles/11564.html)》《[TCP 的那些事儿(下)](https://coolshell.cn/articles/11609.html)》两篇文章中都有引用。
+* [RFC 793 - Transmission Control Protocol](https://tools.ietf.org/html/rfc793) - 最初的 TCP 标准定义，但不包括 TCP 相关细节。
+* [RFC 813 - Window and Acknowledgement Strategy in TCP](https://tools.ietf.org/html/rfc813) - TCP 窗口与确认策略，并讨论了在使用该机制时可能遇到的问题及解决方法。
+* [RFC 879 - The TCP Maximum Segment Size and Related Topics](https://tools.ietf.org/html/rfc879) - 讨论 MSS 参数对控制 TCP 分组大小的重要性，以及该参数与 IP 分段大小的关系等。
+* [RFC 896 - Congestion Control in IP/TCP Internetworks](https://tools.ietf.org/html/rfc896) - 讨论拥塞问题和 TCP 如何控制拥塞。
+* [RFC 2581 - TCP Congestion Control](https://tools.ietf.org/html/rfc2581) - 描述用于拥塞控制的四种机制：慢启动、拥塞防御、快重传和快恢复。后面这个 RFC 被 [RFC 5681](https://tools.ietf.org/html/rfc5681) 所更新。还有 [RFC 6582 - The NewReno Modification to TCP’s Fast Recovery Algorithm](https://tools.ietf.org/html/rfc6582) 中一个改进的快速恢复算法。
+* [RFC 2018 - TCP Selective Acknowledgment Options](https://tools.ietf.org/html/rfc2018) - TCP 的选择确认。
+* [RFC 2883 - An Extension to the Selective Acknowledgement (SACK) Option for TCP](https://tools.ietf.org/html/rfc2883) - 对于 RFC 2018 的改进。
+* [RFC 2988 - Computing TCP’s Retransmission Timer](https://tools.ietf.org/html/rfc2988) - 讨论与 TCP 重传计时器设置相关的话题，重传计时器控制报文在重传前应等待多长时间。也就是经典的 TCP Karn/Partridge 重传算法。
+* [RFC 6298 - Computing TCP’s Retransmission Timer](https://tools.ietf.org/html/rfc6298) - TCP Jacobson/Karels Algorithm 重传算法。
+* [Congestion Avoidance and Control](http://ee.lbl.gov/papers/congavoid.pdf) - 个人觉得 TCP 最牛的不是不丢包，而是拥塞控制，可以读一下经典论文
+* [TCP 的 man page](http://man7.org/linux/man-pages/man7/tcp.7.html) - 关于 Linux 下的 TCP 参数，你需要仔仔细细地读一下
+
+对于第 7 层协议，HTTP 协议是重点要学习的。
+* 推荐书籍《[HTTP 权威指南](https://book.douban.com/subject/10746113/)》
+* HTTP 1.1 的原始 RFC 是 1999 年 6 月的 [RFC 2616](https://tools.ietf.org/html/rfc2616)，但其在 2014 后很快被下面这些 RFC 给取代了。
+* [RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing](https://tools.ietf.org/html/rfc7230)
+* [RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://tools.ietf.org/html/rfc7231)
+* [RFC 7232 - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests](https://tools.ietf.org/html/rfc7232)
+* [RFC 7233 - Hypertext Transfer Protocol (HTTP/1.1): Range Requests](https://tools.ietf.org/html/rfc7233)
+* [RFC 7234 - Hypertext Transfer Protocol (HTTP/1.1): Caching](https://tools.ietf.org/html/rfc7234)
+* [RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication](https://tools.ietf.org/html/rfc7235)
+
+关于 HTTP/2 它于 2015 年被批准通过，现在基本上所有的主流浏览器都默认启用这个协议
+* [Gitbook - HTTP/2 详解](https://legacy.gitbook.com/book/ye11ow/http2-explained/details)
+* [http2 explained](http://daniel.haxx.se/http2/)[（中译版）](https://www.gitbook.com/book/ye11ow/http2-explained/details)
+* [HTTP/2 for a Faster Web](https://cascadingmedia.com/insites/2015/03/http-2.html)
+* [Nginx HTTP/2 白皮书](https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf)
+* HTTP/2 的两个 RFC：
+  - [RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)](https://httpwg.org/specs/rfc7540.html) ，HTTP/2 的协议本身
+  - [RFC 7541 - HPACK: Header Compression for HTTP/2](https://httpwg.org/specs/rfc7541.html) ，HTTP/2 的压缩算法
 
 
 
 
 
 
-# 学习建议
+学习建议
+---
+***
 * 一定要坚持，要保持长时间学习，甚至终生学习的态度。
 * 一定要动手，不管例子多么简单，建议至少自己手动敲一遍看看是否理解里边的细枝末节。
 * 一定要学会思考，思考为什么要这样，而不是那样，还要会举一反三地思考。
