@@ -9,11 +9,10 @@
   - [理论学科](#lilunxueke)
   - [系统知识](#xitongzhishi)
 * [软件设计篇](#ruanjianshejipian)
-  - 软件设计
 * [高手成长篇](#gaoshouchengzhangpian)
 
 
-> 程序员练级攻略
+> 程序员练级攻略。
 
 
 <a id='rumenpian'/>
@@ -376,6 +375,56 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 <a id='gaoshouchengzhangpian'/>
 
 # 五、高手成长篇
+## Linux 系统、内存和网络
+
+### Linux 系统相关
+* [RedHat Enterprise Linux 文档](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/?version=7)
+* [Linux Insides](https://github.com/0xAX/linux-insides)。Github 上的一个开源电子书，讲述了 Linux 内核是怎样启动、初始化以及进行管理的。
+* [LWN's kernel page](https://github.com/0xAX/linux-insides)。上面很多文章来解释 Linux 内核的一些东西。
+* [Learn Linux Kernel from Android Perspective](http://learnlinuxconcepts.blogspot.com/2014/10/this-blog-is-to-help-those-students-and.html)。从 Android 角度来学习 Linux 内核。
+* [Linux Kernel Doc](https://www.kernel.org/doc/)。Linux 的内核文档也可以浏览一下。
+* [Kernel Planet](http://planet.kernel.org/)。Linux 内核开发者的 Blog，有很多很不错的文章和想法。
+* [Linux Performance and Tuning Guidelines](https://lenovopress.com/redp4285.pdf)，IBM 出的红皮书。
+* [TLK: The Linux Kernel](http://tldp.org/LDP/tlk/tlk.html)
+* [Linux Performance](http://www.brendangregg.com/linuxperf.html)，提供了和 Linux 系统性能相关的各种工具和文章收集。
+* [Optimizing web servers for high throughput and low latency](http://www.brendangregg.com/linuxperf.html)，非常底层的系统调优的文章。
+
+
+### 内存相关
+首先，LWN.net 系列文章 "What every programmer should know about memory" 阅读，下面是系列文章的网页版列表(完整的[PDF 文档](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf))：
+* [Part 1: (Introduction)](https://lwn.net/Articles/250967/) ，中译版为 [每个程序员都应该了解的内存知识【第一部分】](https://www.oschina.net/translate/what-every-programmer-should-know-about-memory-part1)
+* [Part 2: (CPU caches)](https://lwn.net/Articles/252125/)
+* [Part 3 (Virtual memory)](http://lwn.net/Articles/253361/)
+* [Part 4 (NUMA systems)](http://lwn.net/Articles/254445/)
+* [Part 5 (What programmers can do - cache optimization)](http://lwn.net/Articles/255364/)
+* [Part 6 (What programmers can do - multi-threaded optimizations)](http://lwn.net/Articles/256433/)
+* [Part 7 (Memory performance tools)](http://lwn.net/Articles/257209/)
+* [Part 8 (Future technologies)](https://lwn.net/Articles/258154/)
+* [Part 9 (Appendices and bibliography)](https://lwn.net/Articles/258188/)
+
+然后后是几篇和内存相关的论文，对于程序的性能优化方面有帮助。
+* [Memory Barriers: a Hardware View for Software Hackers](http://irl.cs.ucla.edu/~yingdi/web/paperreading/whymb.2010.06.07c.pdf)。内存的读写屏障是线程并发访问共享的内存数据时，从程序本身、编译器到 CPU 都必须遵循的一个规范。有了这个规范，才能保证访问共享的内存数据时，一个线程对该数据的更新能被另一个线程以正确的顺序感知到。在 SMP（对称多处理）这种类型的多处理器系统（包括多核系统）上，这种读写屏障还包含了复杂的缓存一致性策略。这篇文章做了详细解释。
+* [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](http://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)，对 ARM 和 POWER 的宽松内存模型的一个教程式的简介。
+* [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](http://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)，介绍 x86 的多处理器内存并发访问的一致性模型 TSO。
+
+接下来是内存管理方面的 lib 库，通常来说，我们有三种内存分配管理模块，就目前而言，BSD 的 jemalloc 有很大的影响力。
+* [ptmalloc](http://www.malloc.de/en/) 是 glibc 的内存分配管理。
+* [tcmalloc](https://github.com/gperftools/gperftools) 是 Google 的内存分配管理模块，全称是 Thread-Caching malloc，基本上来说比 glibc 的 ptmalloc 快两倍以上。
+* [jemalloc](http://jemalloc.net/) 是 BSD 提供的内存分配管理。其论文为 [A Scalable Concurrent malloc(3) Implementation for FreeBSD](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)，这是一个可以并行处理的内存分配管理器。
+* 关于 C 的这些内存分配器，你可以参看 Wikipedia 的 [C Dynamic Memory Allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation#Thread-caching_malloc_(tcmalloc)) 这个词条。
+
+感觉一下上面那三种内存分配器的一些比较和工程实践：
+* [ptmalloc，tcmalloc 和 jemalloc 内存分配策略研究](https://owent.net/2013/867.html)
+* [内存优化总结：ptmalloc、tcmalloc 和 jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize/)
+* [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
+* [Decreasing RAM Usage by 40% Using jemalloc with Python & Celery](https://zapier.com/engineering/celery-python-jemalloc/)
+
+
+### 计算机网络
+
+
+
+
 
 
 # 学习建议
