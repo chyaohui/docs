@@ -3,7 +3,7 @@
 * [入门篇](#rumenpian)
   - [零基础启蒙](#lingjichurumen)
   - [正式入门](#zhengshirumen)
-* [修养篇](#xiuyangpian)
+* [修养篇](#二修养篇)
 * [专业基础篇](#zhuanyejichupian)
   - [编程语言](#bianchengyuyan)
   - [理论学科](#lilunxueke)
