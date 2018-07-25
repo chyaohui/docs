@@ -1,8 +1,8 @@
 目录
 ---
-* [入门篇](#rumenpian)
-  - [零基础启蒙](#lingjichurumen)
-  - [正式入门](#zhengshirumen)
+* [入门篇](#一入门篇)
+  - [零基础启蒙](#1-零基础启蒙)
+  - [正式入门](#2-正式入门)
 * [修养篇](#二修养篇)
 * [专业基础篇](#zhuanyejichupian)
   - [编程语言](#bianchengyuyan)
