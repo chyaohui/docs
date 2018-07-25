@@ -21,19 +21,19 @@
 
 ### 1.1 产生兴趣
 * 书籍《[与孩子一起学编程](https://book.douban.com/subject/5338024/)》。这是一本老少咸宜的编程书。
-* 在线教程《[MDN的web开发入门](https://developer.mozilla.org/zh-CN/docs/learn)》可以认为是web方面的官方技术网站。
+* 在线教程《[MDN 的 web 开发入门](https://developer.mozilla.org/zh-CN/docs/learn)》可以认为是 web 方面的官方技术网站。
 
-### 1.2 入门语言Python
+### 1.2 入门语言 Python
 
-* 书籍《[Python编程快速上手](https://book.douban.com/subject/26836700/)》
-* 书籍《[Python编程：从入门到实践](https://book.douban.com/subject/26829016/)》
+* 书籍《[Python 编程快速上手](https://book.douban.com/subject/26836700/)》
+* 书籍《[Python 编程：从入门到实践](https://book.douban.com/subject/26829016/)》
 * 书籍《[Python Cookbook 中文版](https://book.douban.com/subject/26381341/)》
-* 书籍《[流畅的Python](https://book.douban.com/subject/27028517/)》
+* 书籍《[流畅的 Python](https://book.douban.com/subject/27028517/)》
 
 ### 1.3 入门语言JavaScript
-* 在线教程《[MDN JavaScript教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)》。可以认为这是最权威的JavaScript官方教程，非常全。
-* 在线教程《[W3School JavaScript教程](http://www.w3school.com.cn/js/)》
-* 在线教程《[JavaScript全栈教程（廖雪峰）](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)》
+* 在线教程《[MDN JavaScript 教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)》。可以认为这是最权威的 JavaScript 官方教程，非常全。
+* 在线教程《[W3School JavaScript 教程](http://www.w3school.com.cn/js/)》
+* 在线教程《[JavaScript 全栈教程（廖雪峰）](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)》
 
 ### 1.4 操作系统入门
 * Linux
@@ -49,9 +49,9 @@
 * 前端基础：CSS、HTML、JavaScript
   - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
   - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
-  - 注：并非学习文档所有内容，而是了解CSS和HTML是怎么相互作用来展示数据
-  - 简单学习使用JavaScript操纵HTML元件。
-  - [理解DOM和动态网页](http://www.w3school.com.cn/htmldom/index.asp)
+  - 注：并非学习文档所有内容，而是了解 CSS 和 HTML 是怎么相互作用来展示数据
+  - 简单学习使用 JavaScript 操纵HTML元件。
+  - [理解 DOM 和动态网页](http://www.w3school.com.cn/htmldom/index.asp)
 * 后端基础
   - Python
   - Node.js
@@ -77,23 +77,23 @@
 * 图片验证码
 * 上传图片
 * 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
-* 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
+* 防范 SQL 注入，参看[PHP 官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
 
 ## 2. 正式入门
 **编程技能**
 
 * 编程技巧方面，推荐书籍《[代码大全](https://book.douban.com/subject/1477390/)》。好书和不好的书最大的不一样是，好的书在你不同的阶段来读，你会有不同的收获，而且还会产生更多的深层次的思考。
-* 操作系统方面，推荐书籍《[鸟哥的Linux私房菜](https://book.douban.com/subject/4889838/)》
-* 网络协议，推荐在线教程《[MDN的HTTP文档](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)》
-  - HTTP头
-  - HTTP的请求方法
-  - HTTP的返回码
-  - HTTP的Cookie、缓存、会话、连接管理等
-* 数据库设计 - 推荐慕课网的在线课程《[数据库设计的那些事](https://www.imooc.com/learn/117)》；书籍推荐《[MySQL必知必会](https://book.douban.com/subject/3354490/)》
+* 操作系统方面，推荐书籍《[鸟哥的 Linux 私房菜](https://book.douban.com/subject/4889838/)》
+* 网络协议，推荐在线教程《[MDN 的 HTTP 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)》
+  - HTTP 头
+  - HTTP 的请求方法
+  - HTTP 的返回码
+  - HTTP 的 Cookie、缓存、会话、连接管理等
+* 数据库设计 - 推荐慕课网的在线课程《[数据库设计的那些事](https://www.imooc.com/learn/117)》；书籍推荐《[MySQL 必知必会](https://book.douban.com/subject/3354490/)》
 * 前端方面
-  - 和JavaScript相关的[jQuery](https://jquery.com/)
-  - 和CSS相关的[Bootstrap](https://getbootstrap.com/)
+  - 和 JavaScript 相关的[jQuery](https://jquery.com/)
+  - 和 CSS 相关的[Bootstrap](https://getbootstrap.com/)
 * 字符编码方面，推荐文章《[关于字符编码，你所需要知道的](http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html)》
 
 
@@ -205,7 +205,7 @@
 * 必读书籍《[深入理解计算机系统](https://book.douban.com/subject/5333562/)》
 * ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《[Unix 环境高级编程](https://book.douban.com/subject/1788421/)》
 * ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《Unix 网络编程》 [第 1 卷 套接口 API](https://book.douban.com/subject/1500149/)、[第 2 卷 进程间通信](https://book.douban.com/subject/4118577/)
-* ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《[TCP/IP 详解 卷1协议](https://book.douban.com/subject/1088054/)》 - 必读书籍
+* ([Richard Stevens](https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E5%8F%B2%E8%92%82%E6%96%87%E6%96%AF)) 三部经典书《[TCP/IP 详解 卷1 协议](https://book.douban.com/subject/1088054/)》 - 必读书籍
 
 如果觉得上面这几本经典书比较难啃，可以试试下面这些通俗易懂的(可以先看下面几本)。
 * 推荐书籍《[Linux C 编程一站式学习](https://book.douban.com/subject/4141733/)》，看过。
@@ -234,7 +234,7 @@
 > 学习完《Unix 网络编程》后，一定(是时候)要研究一下`C10K`了，读一下 "[C10K Problem](http://www.kegel.com/c10k.html) ([中文翻译版](https://www.oschina.net/translate/c10k))"。C10K 问题本质上是操作系统处理大并发请求的问题。对于 Web 时代的操作系统而言，对于客户端过来的大量的并发请求，需要创建相应的服务进程或线程。这些进程或线程多了，导致数据拷贝频繁（缓存 I/O、内核将数据拷贝到用户进程空间、阻塞）， 进程 / 线程上下文切换消耗大，从而导致资源被耗尽而崩溃。这就是 C10K 问题的本质。了解这个问题，并了解操作系统是如何通过多路复用的技术来解决这个问题的，有助于你了解各
 种 I/O 和异步模型。现在，整个世界都在解决`C10M`问题，推荐阅读 "[The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)"
 
-* 推荐文章资料：《[C10K问题系列文章](http://www.52im.net/thread-561-1-1.html)》
+* 推荐文章资料：《[C10K 问题系列文章](http://www.52im.net/thread-561-1-1.html)》
 
 
 **实践项目**
@@ -250,7 +250,7 @@ B、实现一个简单的 HTTP 服务器，主要有以下需求：
 * 解释浏览器传来的 HTTP 协议，只需要处理 URL path
 * 然后把所代理的目录列出来
 * 在浏览器上可以浏览目录里的文件和下级目录
-* 如果点击文件，则把文件打开传给浏览器(浏览器能够自动显示图片、PDF或HTML、CSS、JavaScript以及文本文件)
+* 如果点击文件，则把文件打开传给浏览器(浏览器能够自动显示图片、PDF 或 HTML、CSS、JavaScript 以及文本文件)
 * 如果点击子目录，则进入到子目录中，并把子目录中的文件列出来
 
 C、实现一个生产者 / 消费者消息队列服务，主要有以下需求：
