@@ -50,7 +50,7 @@
   - [CSS 文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
   - [HTML 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
   - 注：并非学习文档所有内容，而是了解 CSS 和 HTML 是怎么相互作用来展示数据
-  - 简单学习使用 JavaScript 操纵HTML元件。
+  - 简单学习使用 JavaScript 操纵 HTML 元件。
   - [理解 DOM 和动态网页](http://www.w3school.com.cn/htmldom/index.asp)
 * 后端基础
   - Python
@@ -77,7 +77,7 @@
 * 图片验证码
 * 上传图片
 * 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
-* 防范 SQL 注入，参看[PHP 官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
+* 防范 SQL 注入，参看 [PHP 官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php) 或 [微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
 
 ## 2. 正式入门
@@ -92,8 +92,8 @@
   - HTTP 的 Cookie、缓存、会话、连接管理等
 * 数据库设计 - 推荐慕课网的在线课程《[数据库设计的那些事](https://www.imooc.com/learn/117)》；书籍推荐《[MySQL 必知必会](https://book.douban.com/subject/3354490/)》
 * 前端方面
-  - 和 JavaScript 相关的[jQuery](https://jquery.com/)
-  - 和 CSS 相关的[Bootstrap](https://getbootstrap.com/)
+  - 和 JavaScript 相关的 [jQuery](https://jquery.com/)
+  - 和 CSS 相关的 [Bootstrap](https://getbootstrap.com/)
 * 字符编码方面，推荐文章《[关于字符编码，你所需要知道的](http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html)》
 
 
