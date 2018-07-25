@@ -15,11 +15,7 @@
 > 程序员练级攻略。
 
 
-<a id='rumenpian'/>
-
 # 一、入门篇
-
-<a id='lingjichuqimeng'/>
 
 ## 1. 零基础启蒙
 
@@ -83,7 +79,6 @@
 * 阻止用户在发文章或评论时输入带 HTML 或 JavaScript 的内容
 * 防范 SQL 注入，参看[PHP官方文档](http://www.php.net/manual/zh/security.database.sql-injection.php)或[微软官方文档](https://docs.microsoft.com/zh-cn/sql/relational-databases/security/sql-injection?view=sql-server-2017)
 
-<a id='zhengshirumen'/>
 
 ## 2. 正式入门
 **编程技能**
@@ -130,11 +125,7 @@
 * Google 一些画图表的 JavaScript 库，然后把图片表得风骚一些
 
 
-<a id='xiuyangpian'/>
-
 # 二、修养篇
-
-<a id='yingyunengli'/>
 
 ### 1. 英语能力
 * 坚持 Google 英文关键词，而不是在 Google 里搜中文。
@@ -148,7 +139,6 @@
 * 坚持用英文的教材而不是中文的
 * 最后一个，提高问问题的能力
 
-<a id='xiedaimadexiuyang'/>
 
 ### 2. 写代码的修养
 除了《代码大全》外，还需要补充一些如何写好代码的知识，推荐如下：
@@ -161,11 +151,7 @@
 * Unit Test，推荐《[完美软件：对软件测试的各种幻想](https://book.douban.com/subject/4187479/)》&《[Google 软件测试之道](https://book.douban.com/subject/27187576/)》
 
 
-<a id='zhuanyejichupian'/>
-
 # 三、专业基础篇
-
-<a id='bianchengyuyan'/>
 
 ## 1. 编程语言
 **Java语言：**
@@ -195,7 +181,6 @@
 * 推荐文章《[GO 语言简介（上）- 语法](https://coolshell.cn/articles/8460.html)》
 * 推荐文章《[GO 语言简介（下）- 特性](https://coolshell.cn/articles/8489.html)》
 
-<a id='lilunxueke'/>
 
 ## 2. 理论学科
 **数据结构与算法：**
@@ -214,7 +199,6 @@
 * 推荐书籍《[计算机程序的构造与解释](https://book.douban.com/subject/1148282/)》
 * 推荐书籍《[编译原理](https://book.douban.com/subject/3296317/)》
 
-<a id='xitongzhishi'/>
 
 ## 3. 系统知识
 
@@ -284,8 +268,6 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * 前端方向：你对用户体验或是交互更感兴趣，那么走前端的路吧
 * 其它方向：安全开发、运维开发、嵌入式开发
 
-
-<a id='ruanjianshejipian'/>
 
 # 四、软件设计篇
 
@@ -371,8 +353,6 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * [Concurrent Programming for Scalable Web Architectures](http://berb.github.io/diploma-thesis/community/index.html)，这是一本在线的免费书，
 教你如何架构一个可扩展的高性能的网站。其中谈到了一些不错的设计方法和知识。
 
-
-<a id='gaoshouchengzhangpian'/>
 
 # 五、高手成长篇
 ## 1、Linux 系统、内存和网络
