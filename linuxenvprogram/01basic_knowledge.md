@@ -18,7 +18,25 @@
 
 
 ## 1、一个Linux程序的诞生
+HelloWorld 程序：
+```c
+#include <stdio.h>
+int main(void)
+{
+    printf("Hello World!\n");
+    return 0;
+}
+```
 
+使用 gcc 编译程序：
+```sh
+$ gcc -g -Wall hellowolrd.c -o helloworld
+```
+
+整个过程看似简单，其实涉及到预处理、编译、汇编和链接等多个步骤，只不过 gcc 作为工具集自动完成了所有的步骤。
+* **预处理**。预处理用于处理预处理命令，比如可以将头文件的内容包含到本文件中，即头文件中所有代码都会在 `#include` 处展开。可以通过 `gcc -E helloworld.c > helloworld.i` 在预处理后停止后边的操作，得到预处理后的文件 `helloworld.i`。思考 `为什么不能在头文件中定义全局变量?` 因为定义全局变量的代码会存于所有以#include包含头文件的文件中，都定义一个全局变量，造成了冲突。
+
+* **编译**。
 
 ## 2、程序的构成
 
