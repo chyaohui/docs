@@ -48,6 +48,52 @@ $ gcc -g -Wall -v helloworld.c -o helloworld
 ```
 
 ## 2、程序的构成
+Linux 下的二进制可执行程序的格式一般为 ELF 格式，内容如下：
+```
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x4027e0
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          107352 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         8
+  Size of section headers:           64 (bytes)
+  Number of section headers:         29
+  Section header string table index: 28
+
+Section Headers:
+  [Nr] Name  Type  Address  Offset   Size   EntSize   Flags  Link  Info  Align
+  [13] .text PROGBITS  00000000004027e0  000027e0    000000000000fb68  0000000000000000  AX       0     0     16
+  [25] .data PROGBITS  000000000061a040  0001a040    0000000000000200  0000000000000000  WA       0     0     32
+  [26] .bss  NOBITS    000000000061a240  0001a240    0000000000000d20  0000000000000000  WA       0     0     32
+```
+ELF 文件的主要内容就是由各个 section 及 symbol 表组成的，较为熟悉的是 text 段、data 段、bss 段。
+* **text 段**。为代码段，用于保存可执行指令。
+* **data 段**。为数据段，用于保存有非 0 初始值的全局变量和静态变量。
+* **bss 段**。用于保存没有初始化或初始化为 0 的全局变量和静态变量。当程序加载时，bss 段变量会被初始化为 0。
+
+其它几个算是比较重要的段：
+* **debug 段**。用于保存调试信息。
+* **dynamic 段**。用于保存动态链接信息。
+* **fini 段**。用于保存进程退出时的执行程序，当进程结束时，系统会自动执行这部分代码。
+* **init 段**。用于保存进程启动时的执行程序，当进程启动时，系统会自动执行这部分代码。
+* **rodata 段**。用于保存只读数据，如 const 修饰的全局变量、字符串常量。
+* **symtab 段**。用于保存符号表。
+
+对于与调试相关的段，如果不使用 -g 选项，则不会生成，但与符号相关的段仍然会存在，可以使用 strip 去掉符号等信息，一般嵌入式的产品中，为了减少程序占用的空间，都会使用 strip 去掉非必要的段。
+
+
+
 
 ## 3、程序是如何跑的
 
