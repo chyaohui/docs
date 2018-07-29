@@ -139,6 +139,43 @@ exit_group(0)                           = ?
 * 程序员写代码时根本不用关心参数是如何编译的，编译器已经默默地为我们做了一切----压栈、出栈、保存返回地址等操作，但是编译器如何知道调用函数是普通函数还是系统调用呢？如果是后者，编译器就不能简单地使用栈来传递参数了。
 
 ### 4.2 C库函数
+Linux 环境下，使用的 C 库一般都是 glibc，它封装了几乎所有的系统调用，代码中使用的 "系统调用"，实际上就是调用 C 库中的函数。C 库函数同样位于用户态，所以编译器可以统一处理所有的函数调用，而不用区分该函数到底是不是系统调用。
+
+在 glibc 的代码中，用了大量的编译器特性以及编程技巧，可读性不高。open 在 glibc 中对应的实现函数实际上是 `__open_nocancel`。
+```c
+int __open_nocancel(const char *file, int oflag, ...) {
+    int mode = 0;
+    if (oflag & O_CREAT) {
+        va_list arg;
+        va_start (arg, oflag);
+        mode = va_arg(arg, int);
+        va_end(arg);
+    }
+    return INLINE_SYSCALL(openat, 4, AT_FDCWD, file, oflag, mode);
+}
+```
+其中INLINE_SYSCALL是我们关心的内容，这个宏完成了对真正系统调用的封装：INLINE_SYSCALL->INTERNAL_SYSCALL。
+```c
+# define INTERNAL_SYSCALL(name, err, nr, args...) \
+    ({ \
+    register unsigned int resultvar; \
+    EXTRAVAR_##nr \
+    asm volatile ( \
+    LOADARGS_##nr \
+    "movl %1, %%eax\n\t" \
+    "int $0x80\n\t" \
+    RESTOREARGS_##nr \
+    : "=a" (resultvar) \
+    : "i" (__NR_##name) ASMFMT_##nr(args) : "memory", "cc"); \
+    (int) resultvar; })
+```
+关键代码使用嵌入式汇编写的，`move%1, %%eax` 表示将第 1 个参数(__NR_##name)赋给寄存器 eax。`__NR_##name` 为对应的系统调用号，对于 open 来说，其为 `__NR_openat`。系统调用号再文件 /usr/include/asm/unistd_64.h 中定义，代码如下：
+```c
+$ cat /usr/include/asm/unistd_64.h | grep openat
+#define __NR_openat				257
+```
+
+
 
 ### 4.3 线程安全
 
