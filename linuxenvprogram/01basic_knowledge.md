@@ -93,9 +93,42 @@ ELF 文件的主要内容就是由各个 section 及 symbol 表组成的，较�
 对于与调试相关的段，如果不使用 -g 选项，则不会生成，但与符号相关的段仍然会存在，可以使用 strip 去掉符号等信息，一般嵌入式的产品中，为了减少程序占用的空间，都会使用 strip 去掉非必要的段。
 
 
-
-
 ## 3、程序是如何跑的
+程序是如何 "跑" 起来的？在 Linux 环境下，可以使用 strace 跟踪系统调用，从而帮助自己研究系统程序加载、运行和退出的过程。
+
+```
+$ strace ./hello
+execve("./hello", ["./hello"], [/* 21 vars */]) = 0
+brk(0)                                  = 0x1f7b000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f2c5359b000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=19420, ...}) = 0
+mmap(NULL, 19420, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f2c53596000
+close(3)                                = 0
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000\356\1\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1924768, ...}) = 0
+mmap(NULL, 3750184, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f2c52fe8000
+mprotect(0x7f2c53172000, 2097152, PROT_NONE) = 0
+mmap(0x7f2c53372000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x18a000) = 0x7f2c53372000
+mmap(0x7f2c53378000, 14632, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f2c53378000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f2c53595000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f2c53594000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f2c53593000
+arch_prctl(ARCH_SET_FS, 0x7f2c53594700) = 0
+mprotect(0x7f2c53372000, 16384, PROT_READ) = 0
+mprotect(0x7f2c5359c000, 4096, PROT_READ) = 0
+munmap(0x7f2c53596000, 19420)           = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 1), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f2c5359a000
+write(1, "Hello World!\n", 13Hello World!
+)          = 13
+exit_group(0)                           = ?
++++ exited with 0 +++
+```
+在 Linux 环境中，执行一个命令时，首先是由 shell 调用 fork，然后在子进程中来真正执行这个命令（这一过程在 strace 输出中无法体现）。strace 是 hello 开始执行后的输出。首先是调用 execve 来加载 hello，然后ld会分别检查 ld.so.nohwcap 和 ld.so.preload。其中，如果 ld.so.nohwcap 存在，则 ld 会加载其中未优化版本的库。如果 ld.so.preload 存在，则 ld 会加载其中的库——在一些项目中，我们需要拦截或替换系统调用或 C 库，此时就会利用这个机制，使用 LD_PRELOAD 来实现。之后利用 mmap 将 ld.so.cache 映射到内存中，ld.so.cache 中保存了库的路径，这样就完成了所有的准备工作。接着 ld 加载 c 库—— libc.so.6，利用 mmap 及 mprotect 设置程序的各个内存区域，到这里，程序运行的环境已经完成。后面的 write 会向文件描述符 1（即标准输出）输出 "Hello world！\n"，返回值为 13，它表示 write 成功的字符个数。最后调用 exit_group 退出程序，此时参数为 0，表示程序退出的状态。
 
 ## 4、背景概念介绍
 
