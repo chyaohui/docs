@@ -147,14 +147,14 @@ int __open_nocancel(const char *file, int oflag, ...) {
     int mode = 0;
     if (oflag & O_CREAT) {
         va_list arg;
-        va_start (arg, oflag);
+        va_start(arg, oflag);
         mode = va_arg(arg, int);
         va_end(arg);
     }
     return INLINE_SYSCALL(openat, 4, AT_FDCWD, file, oflag, mode);
 }
 ```
-其中INLINE_SYSCALL是我们关心的内容，这个宏完成了对真正系统调用的封装：INLINE_SYSCALL->INTERNAL_SYSCALL。
+其中 `INLINE_SYSCALL` 是我们关心的内容，这个宏完成了对真正系统调用的封装：`INLINE_SYSCALL->INTERNAL_SYSCALL`。
 ```c
 # define INTERNAL_SYSCALL(name, err, nr, args...) \
     ({ \
@@ -172,12 +172,37 @@ int __open_nocancel(const char *file, int oflag, ...) {
 关键代码使用嵌入式汇编写的，`move%1, %%eax` 表示将第 1 个参数(__NR_##name)赋给寄存器 eax。`__NR_##name` 为对应的系统调用号，对于 open 来说，其为 `__NR_openat`。系统调用号再文件 /usr/include/asm/unistd_64.h 中定义，代码如下：
 ```c
 $ cat /usr/include/asm/unistd_64.h | grep openat
-#define __NR_openat				257
+#define __NR_openat        257
 ```
 
-
-
 ### 4.3 线程安全
+线程安全是指代码可以在多线程环境下 "安全" 地执行。何谓安全？即符合正确的逻辑结果，是程序员期望的正常执行结果。为了实现线程安全，该代码要么只能使用局部变量或资源，要么就是利用锁等同步机制，来实现全局变量或资源的串行访问。
+```c
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+static int counter = 0;
+#define LOOPS 10000000
+static void * thread(void * unused)
+{
+    int i;
+    for (i = 0; i < LOOPS; ++i) {
+        ++counter;
+    }
+    return NULL;
+} 
+int main(void)
+{
+    pthread_t t1, t2;
+    pthread_create(&t1, NULL, thread, NULL);
+    pthread_create(&t2, NULL, thread, NULL);
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    printf("Counter is %d by threads\n", counter);
+    return 0;
+}
+```
+
 
 ### 4.4 原子性
 
