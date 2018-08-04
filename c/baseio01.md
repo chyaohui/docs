@@ -65,8 +65,8 @@ int putchar(int c);
 ```cpp
 #include <stdio.h>
 int fseek(FILE *stream, long offset, int whence);
-whence：从何处开始移动，取值：SEEK_SET | SEEK_CUR | SEEK_END
-offset：移动偏移量，取值：可取正 | 负
+// whence：从何处开始移动，取值：SEEK_SET | SEEK_CUR | SEEK_END
+// offset：移动偏移量，取值：可取正 | 负
 void rewind(FILE *stream);
 ```
 举几个简单例子：
@@ -78,23 +78,27 @@ fseek(fp, -3, SEEK_END);    // 从文件尾向前移动3个字节
 
 offset 可正可负，负值表示向文件开头的方向移动，正值表示向文件尾方向移动，如果向前移动的字节数超过文件开头则出错返回，如果向后移动的字节数超过了文件末尾，再次写入会增加文件尺寸，文件空洞字节都是 0
 
-```cpp
+写入测试数据：
+```sh
 $ echo "5678" > file.txt
-
+```
+设置偏移量并写入文件内容：
+```cpp
 fp = fopen("file.txt", "r+");
 fseek(fp, 10, SEEK_SET);
 fputc('K', fp)
 fclose(fp)
-
-// 通过结果可以看出字母K是从第10个位置开始写的
+```
+通过结果可以看出字母K是从第10个位置开始写的
+```sh
 liwei:/tmp$ od -tx1 -tc -Ax file.txt 
 0000000    35  36  37  38  0a  00  00  00  00  00  4b                    
            5   6   7   8  \n  \0  \0  \0  \0  \0   K
 ```
 
-rewind(fp) 等价于 fseek(fp, 0, SEEK_SET)
+`rewind(fp)` 等价于 `fseek(fp, 0, SEEK_SET)`
 
-ftell(fp) 函数比较简单，直接返回当前文件指针在文件中的位置
+`ftell(fp)` 函数比较简单，直接返回当前文件指针在文件中的位置
 ```cpp
 // 实现计算文件字节数的功能
 fseek(fp, 0, SEEK_END);
@@ -139,7 +143,8 @@ struct t val = {1, 2};
 FILE *fp = fopen("file.txt", "w");
 fwrite(&val, sizeof(val), 1, fp);
 fclose(fp);
-
+```
+```sh
 liwei:/tmp$ od -tx1 -tc -Ax file.txt 
 0000000    01  00  00  00  02  00  00  00                                
          001  \0  \0  \0 002  \0  \0  \0
@@ -253,7 +258,8 @@ int fscanf(FILE *stream, const char *format, ...);
 FILE *fp = fopen("file.txt", "w");
 fprintf(fp, "%d-%s-%f\n", 32, "hello", 0.12);
 fclose(fp);
-
+```
+```sh
 liwei:/tmp$ cat file.txt 
 32-hello-0.120000
 ```
@@ -287,9 +293,4 @@ while(1);
 * 程序退出时通常也会自动 flush 缓冲区
 
 如果不想完全依赖自动的 flush 操作，可以调用 fflush 函数手动操作。若调用 fflush(NULL) 可以对所有打开文件的 IO 缓冲区做 flush 操作。缓冲区大小也可以自定义设置，一般情况无需设置，默认即可。
-
-
-### 欢迎关注公众号: 「linuxblogs」
-
-![微信二维码](https://mmbiz.qpic.cn/mmbiz_jpg/yVibDjicRT1VsV0RH8KV6zMUhvJIajBDGibNAM19nKibia5Ae59EOnic3MJNrhJYdXOPqpVLXAvnr4ICAaZTBhW1JUxA/0?wx_fmt=jpeg)
 
