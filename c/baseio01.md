@@ -147,7 +147,7 @@ liwei:/tmp$ od -tx1 -tc -Ax file.txt
 从结果可以看出，写入的是 8 个字节，有兴趣的同学可以就此分析下系统的「大小端」和结构体的「对齐补齐」问题。
 
 ## 七、格式化IO函数
-### (1). printf / scanf
+### printf/scanf
 ```cpp
 int printf(const char *format, ...);
 int scanf(const char *format, ...);
@@ -169,7 +169,7 @@ scanf("%d/%d/%d", &year, &month, &day);
 printf("year = %d, month = %d, day = %d\n", year, month, day);
 ```
 
-### (2). sprintf / sscanf / snprintf
+### sprintf/sscanf/snprintf
 sprintf 并不打印到文件，而是打印到用户提供的缓冲区中并在末尾加 '\0'，由于格式化后的字符串长度很难预计，所以很可能造成缓冲区溢出，强烈推荐 snprintf 更好一些，参数 size 指定了缓冲区长度，如果格式化后的字符串超过缓冲区长度，snprintf 就把字符串截断到 size - 1 字节，再加上一个 '\0'，保证字符串以 '\0' 结尾。如果发生截断，返回值是截断之前的长度，通过对比返回值与缓冲区实际长度对比就知道是否发生截断。
 ```cpp
 int sscanf(const char *str, const char *format, ...);
@@ -241,7 +241,7 @@ sscanf("201*1b_-cdZA&", "%[0-9|_|--|a-z|A-Z|&|*]", buf);
 
 如果能将上述几个例子搞明白，相信基本上已经掌握了 sscanf 的用法，实践才是检验真理的唯一标准，只有多使用，多思考才能真正理解它的用法。
 
-### (3). fprintf / fscanf
+### fprintf/fscanf
 fprintf 打印到指定的文件 stream 中，fscanf 从文件中格式化读取数据，类似 scanf 函数。相关函数的声明如下：
 ```cpp
 int fprintf(FILE *stream, const char *format, ...);
