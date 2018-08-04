@@ -121,5 +121,3 @@ $ ln -s /usr/local/python27/bin/pip2.7 /usr/bin/pip
 $ pip install ipython==1.2.1
 $ ln -s /usr/local/python27/bin/ipython /usr/bin/ipython
 ```
-
-参考链接：
