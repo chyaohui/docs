@@ -82,7 +82,7 @@ NAME=br0
   暂略。
 
 4、**启动 libvirtd 相关服务**
-```sh
+  ```sh
 [root@kvm ~]$ /etc/init.d/libvirtd start
 [root@kvm ~]$ /etc/init.d/messagebus restart
 ```
@@ -97,8 +97,85 @@ libvirtd: relocation error: libvirtd: ... version ... libdevmapper.so.1.02 [失�
 ```
 结果：
 ```sh
-[root@kvm ~]# brctl show
+[root@kvm ~]$ brctl show
 bridge name    bridge id           STP enabled    interfaces
 br0         8000.000c29181c75   no          eth0
 virbr0      8000.525400c207c7   yes         virbr0-nic
 ```
+
+## 三、安装虚拟机
+1、**创建虚拟机镜像**
+
+关于虚拟机镜像，有很多种类型：raw、qcow2、vmdk等，我们推荐使用 qcow2 格式的镜像，因为 qcow2 格式的镜像支持快照，使用的比较广泛。在创建虚拟机之前需要手动去创建 qcow2 格式的镜像磁盘文件，以供安装虚拟机时使用。按照如下命令进行创建：
+```sh
+$ qemu-img create -f qcow2 -o preallocation=metadata /data/kvm/liwei01.qcow2 50G
+```
+
+2、**虚拟机的安装**
+
+* 安装方式 1：通过网络镜像安装，文本控制台，无vnc支持。
+```
+virt-install --name liwei01 --ram 1024 --vcpus 1 \
+    -f /data/kvm/liwei01.qcow2  --os-type linux \
+    --os-variant rhel6 --network bridge=br0 \
+    --graphics none --console pty,target_type=serial \
+    --location 'http://mirrors.163.com/centos/6.8/os/i386/' \
+    --extra-args 'console=ttyS0,115200n8 serial'
+```
+* 安装方式 2：通过网络镜像安装，支持 vnc ，默认无文本控制台。
+```sh
+virt-install --name liwei01 --ram 1024 --vcpus 1 \
+    -f /data/kvm/liwei01.qcow2  --os-type linux \
+    --os-variant rhel6 --network bridge=br0 \
+    --graphics vnc,listen=0.0.0.0,port=5920 \
+    --location 'http://mirrors.163.com/centos/6.8/os/i386/'
+```
+* 安装方式 3：通过 iso 镜像实现本地安装，支持 vnc ，无文本控制台。
+```sh
+virt-install --name liwei01 --ram 1024 --vcpus 1 \
+    -f /data/kvm/liwei01.qcow2  --os-type linux \
+    --os-variant rhel6 --network bridge=br0 \
+    --cdrom CentOS-6.8-i386-minimal.iso \
+    --graphics vnc,listen=0.0.0.0,port=5920
+```
+* 安装方式四：通过基础镜像模板快速安装(拷贝)
+  
+  创建镜像文件：
+  ```sh
+[root@kvm ~]$ qemu-img create -f qcow2 /data/kvm/liwei.qcow2 50G
+# 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
+[root@kvm ~]# cp /data/kvm/liwei.qcow2 /data/kvm/liwei01.qcow2
+```
+安装命令：
+```sh
+# 以拷贝的 liwei01.qcow2 为模板进行安装，安装方式是从 liwei01.qcow2 镜像启动
+[root@kvm ~]$ virt-install --name liwei01 --ram 1024 --vcpus=1 \
+    --disk /data/kvm/liwei01.qcow2,format=qcow2,bus=virtio \
+    --network bridge=br0 --graphics vnc,listen=0.0.0.0,port=5904 \
+    --boot hd
+```
+**说明**：本方式创建 img 镜像的时候没有指定 preallocation=metadata 选项，这样存储文件空间显示比较小，方便拷贝，不加这个选项时，在 virt-install 时候需要在 --disk 选项后边加上 bus=virtio，如果不加在安装操作系统的时候似乎是识别不出来磁盘空间，会提示磁盘空间不足。采用这种方式安装的速度非常快，其实就是从已经存在的操作系统镜像启动虚拟机并 define 一个新的虚拟机 liwei01，可以通过脚本快速创建出多个相同配置的虚拟机。当然可以在基础镜像中安装公共的软件包和设置相同的配置，这样后续基于这个 img 安装的虚拟机都有类似的配置，省去重复安装软件包的麻烦。
+
+* 安装方式 5：通过基础镜像模板快速安装(共享)
+
+  创建镜像：
+  ```sh
+[root@kvm ~]# qemu-img create -f qcow2 -o preallocation=metadata /data/kvm/liwei.qcow2 50G
+# 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
+# 以 liwei.qcow2 镜像为模板创建 liwei01.qcow2 镜像
+[root@kvm ~]# qemu-img create -f qcow2 -o backing_file=liwei.qcow2 liwei01.qcow2 10G
+```
+  安装命令：
+  ```sh
+[root@kvm ~]$ virt-install --name liwei01 --ram 1024 --vcpus=1 \
+    --disk /data/kvm/liwei01.qcow2,format=qcow2,bus=virtio \
+    --network bridge=br0 --graphics vnc,listen=0.0.0.0,port=5904 \
+    --boot hd
+```
+**说明**：在创建镜像 liwei01.qcow2 指定了 backing_file=liwei.qcow2 选项，表示以 liwei.qcow2 为后端镜像，以后对虚机 liwei01 的所有的写操作都会记录到 liwei01 镜像，实际操作系统是在 liwei.qcow2 镜像中，liwei.qcow2 镜像是只读的。也就是说后续以 liwei.qcow2 镜像为后端的虚机都共享这个镜像，而具体某个虚机的写操作内容都要记录到对应自己的镜像文件中去。注意和方式 4 的区别。
+
+3、**通过 vnc 或 文本控制台进行系统安装**
+
+* 方式 1 ：通过文本控制台进行管理安装  virsh console liwei01 后续也能用此方式进行登陆管理虚拟机。
+* 方式 2：通过 vnc 客户端进行连接，`virsh vncdisplay liwei01 :20` 客户端通过 url: 172.16.1.8:20 进行连接。
+* 方式 3：同方式二一样，具体安装过程与普通操作系统安装过程一样，过程略。
