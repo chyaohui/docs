@@ -219,11 +219,9 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
   ```[root@kvm ~]# virsh snapshot-create liwei```
 * 查看快照列表
 
-```sh
-[root@kvm ~]$ virsh snapshot-list liwei
-# 可以通过 qemu-img 查看镜像的快照信息
-[root@kvm ~]$ qemu-img info /data/kvm/liwei.img
-```
+  ```[root@kvm ~]$ virsh snapshot-list liwei```
+  ```# 可以通过 qemu-img 查看镜像的快照信息```
+  ```[root@kvm ~]$ qemu-img info /data/kvm/liwei.img```
 * 切换快照
 
   ```[root@kvm ~]# virsh snapshot-revert liwei 1477285698```
