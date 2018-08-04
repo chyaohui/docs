@@ -219,9 +219,10 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
   ```[root@kvm ~]# virsh snapshot-create liwei```
 * 查看快照列表
 
-  ```[root@kvm ~]$ virsh snapshot-list liwei```
-  ```# 可以通过 qemu-img 查看镜像的快照信息```
-  ```[root@kvm ~]$ qemu-img info /data/kvm/liwei.img```
+  ```[root@kvm ~]# virsh snapshot-list liwei```
+* 查看镜像的快照信息
+
+  ```[root@kvm ~]# qemu-img info /data/kvm/liwei.img```
 * 切换快照
 
   ```[root@kvm ~]# virsh snapshot-revert liwei 1477285698```
@@ -235,84 +236,83 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
   ```/var/lib/libvirt/qemu/snapshot```
  
-
-七、虚拟机磁盘扩容和添加磁盘
-1. 虚拟机扩容磁盘，给现有磁盘增加容量
-
-[root@kvm ~]# qemu-img resize /data/kvm/liwei.qcow2 +5G
+## 七、虚拟机磁盘扩容和添加磁盘
+1、**虚拟机扩容磁盘，给现有磁盘增加容量**
+```sh
+[root@kvm ~]$ qemu-img resize /data/kvm/liwei.qcow2 +5G
 # 重启虚拟机 reboot虚机不生效
-[root@kvm ~]# virsh destroy liwei
-[root@kvm ~]# virsh start   liwei
-在虚拟机中使用 fdisk -l 查看，通过观察block 块 id 可以发现存储空间多了，还必须将多余部分分区、格式化使用，默认使用 lvm 。
+[root@kvm ~]$ virsh destroy liwei
+[root@kvm ~]$ virsh start   liwei
+```
+在虚拟机中使用 fdisk -l 查看，通过观察 block 块 id 可以发现存储空间多了，还必须将多余部分分区、格式化使用，默认使用 lvm 。
 
-2. 给虚拟机添加磁盘
+2、**给虚拟机添加磁盘**
 
 按照如下步骤：
+* 关闭虚拟机
+* 使用 qemu-img 创建磁盘镜像
+* 使用 virsh edit liwei 编辑虚机配置文件，添加一条磁盘记录，适当修改信息
+* 虚拟机开机 -> fdisk -> 格式化 -> ok
 
-关闭虚拟机
-使用 qemu-img 创建磁盘镜像
-使用 virsh edit liwei 编辑虚机配置文件，添加一条磁盘记录，适当修改信息
-虚拟机开机 -> fdisk -> 格式化 -> ok.
 注：可以尝试不分区直接格式化，也可以尝试使用 lvm 。
 
- 
 
-八、使用虚拟磁盘恢复虚拟机
+## 八、使用虚拟磁盘恢复虚拟机
 思路：首先得有镜像文件(已有) + xml 配置文件
-
-[root@kvm ~]#  virsh dumpxml liwei > /etc/libvirt/qemu/liwei01.xml
+```sh
+[root@kvm ~]$  virsh dumpxml liwei > /etc/libvirt/qemu/liwei01.xml
 # 编辑配置文件，修改为适当的值
 # 添加定义
 virsh define /etc/libvirt/qemu/liwei01.xml
 virsh list --all   #即可查到该虚拟机
- 
+```
 
-九、调整CPU、内存规格
-如果要调整的 cpu 核数和内存超过安装虚机时指定的最大值，则需要关闭虚机来修改最大值，动态调整的值不能超过设置最大值，擦，一般使用值和最大值都是保持一致，一起修改。所以在线动态修改没什么意义，推荐直接修改配置文件就 OK。
-
-[root@kvm ~]# virsh edit liwei01
+## 九、调整CPU、内存规格
+如果要调整的 cpu 核数和内存超过安装虚机时指定的最大值，则需要关闭虚机来修改最大值，动态调整的值不能超过设置最大值，但使用值和最大值都是保持一致，一起修改。所以在线动态修改没什么意义，推荐直接修改配置文件就 OK。
+```sh
+[root@kvm ~]$ virsh edit liwei01
 <memory unit='KiB'>1048576</memory>
 <currentMemory unit='KiB'>1048576</currentMemory>
 <vcpu placement='static'>1</vcpu>
+```
 重启虚机 liwei01 就ok.
 
- 
 
-十、调整虚拟机网卡
-1. 添加虚拟机网卡
-
+## 十、调整虚拟机网卡
+1、**添加虚拟机网卡**
+```sh
 # 临时命令生效
-[root@kvm ~]# virsh attach-interface liwei --type bridge --source br0  
+[root@kvm ~]$ virsh attach-interface liwei --type bridge --source br0  
 
 # 修改虚机配置文件
-[root@kvm ~]# virsh dumpxml liwei > /etc/libvirt/qemu/liwei.xml
-[root@kvm ~]# virsh define /etc/libvirt/qemu/liwei.xml 
-2. 删除虚拟机网卡
-
-[root@kvm ~]# virsh detach-interface liwei --type bridge --mac 52:54:00:14:86:cf
-3. 指定网卡类型
+[root@kvm ~]$ virsh dumpxml liwei > /etc/libvirt/qemu/liwei.xml
+[root@kvm ~]$ virsh define /etc/libvirt/qemu/liwei.xml 
+```
+2. **删除虚拟机网卡**
+```sh
+[root@kvm ~]$ virsh detach-interface liwei --type bridge --mac 52:54:00:14:86:cf
+```
+3、**指定网卡类型**
 
 网卡默认类型是 rtl 品牌的网卡，这里设置为 intel 网卡 e1000 系列。修改如下配置文件即可。
-
+```xml
 <interface type='bridge'>
   <mac address='52:54:00:b5:68:a4'/>
   <source bridge='br0'/>
   <model type='e1000'/>      # 添加设置字段
   <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
 </interface>
+```
 使用 virsh 重启虚拟机，在虚拟机中查看：
-
-[root@localhost ~]# lspci | grep "Ethernet"
+```sh
+[root@localhost ~]$ lspci | grep "Ethernet"
 00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 03)
- 
+```
 
-十一、虚拟机的迁移
+## 十一、虚拟机的迁移
 几个步骤：
+* 关闭虚拟机
+* 拷贝镜像文件
+* 拷贝配置文件
+* virsh define vm
 
-1.关闭虚拟机
-2.拷贝镜像文件
-3.拷贝配置文件
-4.virsh define vm
- 
-
-待更新......
