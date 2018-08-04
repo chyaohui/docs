@@ -7,29 +7,28 @@
 * virsh 等命令行管理工具。
 
 ## 一、环境准备
-1. **实验环境**
+1、**实验环境**
 * 操作系统：CentOS 6.4 x86_64 mini
 * 宿主机：vmware workstation 虚拟机
 
-2. **检查宿主机处理器是否支持虚拟化**
+2、**检查宿主机处理器是否支持虚拟化**
 ```sh
 [root@kvm ~]$ egrep -o 'vmx | svm' /proc/cpuinfo | wc -l
 ```
 如果显示数值是 0，则表示该 CPU 不支持虚拟化。
 
-3. **配置或设置宿主机**
+3、**配置或设置宿主机**
 * CPU：2-4 core  开启 cpu 虚拟化(bios 设置 或 vmware 设置)
 * 内存：4-8 GB
 * 硬盘：100 GB
 
-4. **关闭 iptables 和 selinux**
-
-* 关闭 iptables 服务：
+4、**关闭 iptables 和 selinux**
+关闭 iptables 服务：
 ```sh
 [root@kvm ~]$ service iptables stop
 [root@kvm ~]$ chkconfig iptables off
 ```
-* 关闭 selinux：
+关闭 selinux：
 ```sh
 [root@kvm ~]$ setenforce 0
 [root@kvm ~]$ vi /etc/selinux/config
