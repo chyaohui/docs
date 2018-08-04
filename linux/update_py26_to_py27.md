@@ -77,7 +77,7 @@ $ vim /etc/ld.so.conf
 $ ldconfig  # 使新添加的路径生效
 ```
 
-## 二、解决 yum 兼容性问题
+## 解决 yum 兼容性问题
 因为 yum 是不兼容 Python 2.7 的，所以 yum 不能正常工作，我们需要指定 yum 的 Python 为 2.6。
 
 1、**升级 python 后 yum 出现的问题**
