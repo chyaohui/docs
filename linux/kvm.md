@@ -141,7 +141,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 * 安装方式四：通过基础镜像模板快速安装(拷贝)
   
   创建镜像文件：
-  ```sh
+```sh
 [root@kvm ~]$ qemu-img create -f qcow2 /data/kvm/liwei.qcow2 50G
 # 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
 [root@kvm ~]# cp /data/kvm/liwei.qcow2 /data/kvm/liwei01.qcow2
@@ -158,15 +158,15 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
 * 安装方式 5：通过基础镜像模板快速安装(共享)
 
-  创建镜像：
-  ```sh
+创建镜像：
+```sh
 [root@kvm ~]# qemu-img create -f qcow2 -o preallocation=metadata /data/kvm/liwei.qcow2 50G
 # 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
 # 以 liwei.qcow2 镜像为模板创建 liwei01.qcow2 镜像
 [root@kvm ~]# qemu-img create -f qcow2 -o backing_file=liwei.qcow2 liwei01.qcow2 10G
 ```
-  安装命令：
-  ```sh
+安装命令：
+```sh
 [root@kvm ~]$ virt-install --name liwei01 --ram 1024 --vcpus=1 \
     --disk /data/kvm/liwei01.qcow2,format=qcow2,bus=virtio \
     --network bridge=br0 --graphics vnc,listen=0.0.0.0,port=5904 \
