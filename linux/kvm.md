@@ -184,6 +184,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 ## 四、KVM 常用操作
 * 开机：virsh start vm
 * 关机：virsh shutdown vm 
+
   如果不生效，需要在 vm 中执行：`yum install -y acpid`
 * 强关：virsh destroy vm
 * 删除：virsh undefine vm
@@ -195,6 +196,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 * 设置自动启动：virsh autostart vm
 * 关闭自动启动：virsh autostart --disable vm
 * 登陆虚机控制台：virsh console vm
+
   只对指定了 `console` 的虚机才管用(方式 1)
 * 退出虚机控制台：ctrl + ]
 
@@ -213,20 +215,26 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
   - 虚拟机是关机状态。
   - 虚拟机镜像格式是 qcow2。
 * 创建快照
+
   ```[root@kvm ~]# virsh snapshot-create liwei```
 * 查看快照列表
+
 ```sh
 [root@kvm ~]$ virsh snapshot-list liwei
 # 可以通过 qemu-img 查看镜像的快照信息
 [root@kvm ~]$ qemu-img info /data/kvm/liwei.img
 ```
 * 切换快照
+
   ```[root@kvm ~]# virsh snapshot-revert liwei 1477285698```
 * 查看当前快照
+
   ```[root@kvm ~]# virsh snapshot-current liwei```
 * 删除快照
+
   ```[root@kvm ~]# virsh snapshot-delete liwei 1477285698```
 * 快照文件存储位置
+
   ```/var/lib/libvirt/qemu/snapshot```
  
 
