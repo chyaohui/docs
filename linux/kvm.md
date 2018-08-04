@@ -61,7 +61,9 @@ TYPE=Ethernet
 ONBOOT=yes
 BOOTPROTO=none
 BRIDGE=br0
-
+```
+配置 ifcfg-br0 接口：
+```sh
 [root@kvm ~]$ vi ifcfg-br0
 DEVICE=br0
 TYPE=Bridge
@@ -72,8 +74,6 @@ PREFIX=24
 GATEWAY=172.16.1.1
 DNS1=114.114.114.114
 NAME=br0
-
-# 重启网络
 [root@kvm ~]$ service network restart
 ```
 
@@ -139,12 +139,11 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
     --graphics vnc,listen=0.0.0.0,port=5920
 ```
 * 安装方式 4：通过基础镜像模板快速安装(拷贝)
-  
-创建镜像文件：
 ```sh
+# 创建镜像文件
 [root@kvm ~]$ qemu-img create -f qcow2 /data/kvm/liwei.qcow2 50G
 # 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
-[root@kvm ~]# cp /data/kvm/liwei.qcow2 /data/kvm/liwei01.qcow2
+[root@kvm ~]$ cp /data/kvm/liwei.qcow2 /data/kvm/liwei01.qcow2
 ```
 安装命令：
 ```sh
@@ -157,13 +156,14 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 **说明**：本方式创建 img 镜像的时候没有指定 preallocation=metadata 选项，这样存储文件空间显示比较小，方便拷贝，不加这个选项时，在 virt-install 时候需要在 --disk 选项后边加上 bus=virtio，如果不加在安装操作系统的时候似乎是识别不出来磁盘空间，会提示磁盘空间不足。采用这种方式安装的速度非常快，其实就是从已经存在的操作系统镜像启动虚拟机并 define 一个新的虚拟机 liwei01，可以通过脚本快速创建出多个相同配置的虚拟机。当然可以在基础镜像中安装公共的软件包和设置相同的配置，这样后续基于这个 img 安装的虚拟机都有类似的配置，省去重复安装软件包的麻烦。
 
 * 安装方式 5：通过基础镜像模板快速安装(共享)
-
-创建镜像：
 ```sh
-[root@kvm ~]# qemu-img create -f qcow2 -o preallocation=metadata /data/kvm/liwei.qcow2 50G
+# 创建镜像：
+[root@kvm ~]$ qemu-img create -f qcow2 -o preallocation=metadata \
+              /data/kvm/liwei.qcow2 50G
 # 通过 liwei.qcow2 安装虚拟机 ... 安装完毕.
 # 以 liwei.qcow2 镜像为模板创建 liwei01.qcow2 镜像
-[root@kvm ~]# qemu-img create -f qcow2 -o backing_file=liwei.qcow2 liwei01.qcow2 10G
+[root@kvm ~]$ qemu-img create -f qcow2 -o backing_file=liwei.qcow2 \
+              liwei01.qcow2 10G
 ```
 安装命令：
 ```sh
@@ -183,9 +183,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
 ## 四、KVM 常用操作
 * 开机：`virsh start vm`
-* 关机：`virsh shutdown vm`
-
-  如果不生效，需要在 vm 中执行：`yum install -y acpid`
+* 关机：`virsh shutdown vm`，如果不生效，需要在 vm 中执行：`yum install -y acpid`
 * 强关：`virsh destroy vm`
 * 删除：`virsh undefine vm`
 * 定义：`virsh define vm`
@@ -195,9 +193,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 * 包含关机的虚机：`virsh list --all`
 * 设置自动启动：`virsh autostart vm`
 * 关闭自动启动：`virsh autostart --disable vm`
-* 登陆虚机控制台：`virsh console vm`
-
-  只对指定了 console 的虚机才管用(方式 1)
+* 登陆虚机控制台：`virsh console vm`，只对指定了 console 的虚机才管用(方式 1)
 * 退出虚机控制台：`ctrl + ]`
 
 
@@ -205,7 +201,8 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 比如：将虚拟机 liwei01 克隆为虚拟机 liwei02
 
 ```sh
-[root@kvm ~]$ virt-clone --original liwei01 --name liwei02 --file /data/kvm/liwei02.qcow2
+[root@kvm ~]$ virt-clone --original liwei01 --name liwei02 \
+              --file /data/kvm/liwei02.qcow2
 ```
 注意：克隆前需要先关闭虚拟机；克隆完毕，一般需要设置虚拟机的网络。
 
@@ -236,7 +233,7 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
   ```/var/lib/libvirt/qemu/snapshot```
  
-## 七、虚拟机磁盘扩容和添加磁盘
+## 七、磁盘扩容和添加磁盘
 1、**虚拟机扩容磁盘，给现有磁盘增加容量**
 ```sh
 [root@kvm ~]$ qemu-img resize /data/kvm/liwei.qcow2 +5G
@@ -288,10 +285,12 @@ virsh list --all   #即可查到该虚拟机
 [root@kvm ~]$ virsh dumpxml liwei > /etc/libvirt/qemu/liwei.xml
 [root@kvm ~]$ virsh define /etc/libvirt/qemu/liwei.xml 
 ```
-2. **删除虚拟机网卡**
+
+2、**删除虚拟机网卡**
 ```sh
-[root@kvm ~]$ virsh detach-interface liwei --type bridge --mac 52:54:00:14:86:cf
+$ virsh detach-interface liwei --type bridge --mac 52:54:00:14:86:cf
 ```
+
 3、**指定网卡类型**
 
 网卡默认类型是 rtl 品牌的网卡，这里设置为 intel 网卡 e1000 系列。修改如下配置文件即可。
@@ -306,7 +305,7 @@ virsh list --all   #即可查到该虚拟机
 使用 virsh 重启虚拟机，在虚拟机中查看：
 ```sh
 [root@localhost ~]$ lspci | grep "Ethernet"
-00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 03)
+00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller
 ```
 
 ## 十一、虚拟机的迁移
