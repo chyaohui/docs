@@ -2,13 +2,13 @@
 
 ## 0、关于 libvirt 程序
 说到 kvm 必须提及 libvirt 程序集，它是用来管理 kvm 虚拟机的，当然其实也可以管理 xen 等其它虚拟化的虚拟机。libvirt 包括三部分：
-* libvirtd 是后台服务程序；
-* libvirt 是管理虚拟机的 API 接口，可以通过 python c java 等语言来编写程序管理虚拟机，比较典型的 virt-manager 就是使用 python 写的可视化工具；
-* virsh 等命令行管理工具。
+* `libvirtd` 是后台服务程序；
+* `libvirt` 是管理虚拟机的 API 接口，可以通过 python c java 等语言来编写程序管理虚拟机，比较典型的 virt-manager 就是使用 python 写的可视化工具；
+* `virsh` 等命令行管理工具。
 
 ## 一、环境准备
 1、**实验环境**
-* 操作系统：CentOS 6.4 x86_64 mini
+* 操作系统：CentOS 6.4 x86_64
 * 宿主机：vmware workstation 虚拟机
 
 2、**检查宿主机处理器是否支持虚拟化**
@@ -182,23 +182,23 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
 
 ## 四、KVM 常用操作
-* 开机：virsh start vm
-* 关机：virsh shutdown vm 
+* 开机：`virsh start vm`
+* 关机：`virsh shutdown vm`
 
   如果不生效，需要在 vm 中执行：`yum install -y acpid`
-* 强关：virsh destroy vm
-* 删除：virsh undefine vm
-* 定义：virsh define vm
-* 挂起：virsh suspend vm
-* 恢复：virsh resume vm
-* 虚拟机列表：virsh list
-* 包含关机的虚机：virsh list --all
-* 设置自动启动：virsh autostart vm
-* 关闭自动启动：virsh autostart --disable vm
-* 登陆虚机控制台：virsh console vm
+* 强关：`virsh destroy vm`
+* 删除：`virsh undefine vm`
+* 定义：`virsh define vm`
+* 挂起：`virsh suspend vm`
+* 恢复：`virsh resume vm`
+* 虚拟机列表：`virsh list`
+* 包含关机的虚机：`virsh list --all`
+* 设置自动启动：`virsh autostart vm`
+* 关闭自动启动：`virsh autostart --disable vm`
+* 登陆虚机控制台：`virsh console vm`
 
-  只对指定了 `console` 的虚机才管用(方式 1)
-* 退出虚机控制台：ctrl + ]
+  只对指定了 console 的虚机才管用(方式 1)
+* 退出虚机控制台：`ctrl + ]`
 
 
 ## 五、虚拟机的克隆
@@ -250,8 +250,8 @@ virt-install --name liwei01 --ram 1024 --vcpus 1 \
 
 按照如下步骤：
 * 关闭虚拟机
-* 使用 qemu-img 创建磁盘镜像
-* 使用 virsh edit liwei 编辑虚机配置文件，添加一条磁盘记录，适当修改信息
+* 使用 `qemu-img` 创建磁盘镜像
+* 使用 `virsh edit liwei` 编辑虚机配置文件，添加一条磁盘记录，适当修改信息
 * 虚拟机开机 -> fdisk -> 格式化 -> ok
 
 注：可以尝试不分区直接格式化，也可以尝试使用 lvm 。
@@ -314,5 +314,5 @@ virsh list --all   #即可查到该虚拟机
 * 关闭虚拟机
 * 拷贝镜像文件
 * 拷贝配置文件
-* virsh define vm
+* `virsh define vm`
 
