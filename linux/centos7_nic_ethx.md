@@ -15,17 +15,17 @@
 ## 网卡名称字符含义
 1、**前2个字符的含义**
 
-* en　　以太网　　　　Ethernet
-* wl　　无线局域网　　WLAN
-* ww　  无线广域网　　WWAN
+* `en`　　以太网　　　　Ethernet
+* `wl`　　无线局域网　　WLAN
+* `ww`　  无线广域网　　WWAN
 
 2、**第3个字符根据设备类型选择**
 
-* o<index>           on-board device index number
-* s<slot>            hotplug slot index number
-* x<MAC>             MAC address
-* p<bus>s<slot>      PCI geographical location
-* p<bus>s<slot>      USB port number chain
+* `o<index>:           on-board device index number`
+* `s<slot>:            hotplug slot index number`
+* `x<MAC>:             MAC address`
+* `p<bus>s<slot>:      PCI geographical location`
+* `p<bus>s<slot>:      USB port number chain`
  
 
 ## 修改网卡名称样式为ethx
@@ -33,8 +33,10 @@
 
 1、**编辑 grub 配置文件**
 ```sh
-$ vim /etc/sysconfig/grub   # 其实是/etc/default/grub的软连接
-# 为GRUB_CMDLINE_LINUX变量增加2个参数，具体内容如下(加粗)：
+$ vim /etc/sysconfig/grub
+# 其实是/etc/default/grub的软连接
+
+# 为GRUB_CMDLINE_LINUX变量增加2个参数：
 GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=cl/root rd.lvm.lv=cl/swap net.ifnames=0 biosdevname=0 rhgb quiet"
 ```
 
