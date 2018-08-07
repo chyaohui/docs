@@ -19,3 +19,65 @@
 待补充 。。。
 
 
+## 2、打开文件
+
+### 2.1 open 介绍
+函数原型：
+```cpp
+int open(const char *pathname, int flags, mode_t mode);
+```
+
+open 函数的参数解释：
+* pathname：表示要打开文件的路径。
+* flags：用于指示打开文件的选项。常用的 `O_RDONLY`、`O_WRONLY`、`RDWR`，这三个选项必须有且只能有一个被指定。
+* mode：只在创建文件时需求，用于指定所创建文件的权限位(还要受 umask 环境变量的影响)
+
+### 2、更多选项
+
+列出 Linux 平台支持的大部分选项：
+* `O_APPEND`：每次进行写操作时，内核都会先定位到文件尾，再执行写操作。
+* `O_ASYNC`：使用异步 IO 模式。
+* `O_CLOEXEC`：在打开文件的时候，就为文件描述符设置 FD_CLOEXEC 标志。
+* `O_CREAT`：当文件不存在时，就创建文件。
+* `O_DIRECT`：对该文件进行直接 IO，不使用 VFS Cache。
+* `O_DIRECTORY`：要求打开的路径必须是目录。
+* `O_EXCL`：该标志用于确保是此次调用创建的文件，需要与 `O_CREAT` 同时使用，当文件已经存在时，open 函数会返回失败。
+* `O_LARGEFILE`：表明文件为大文件。
+* `O_NOATIME`：读取文件时，不更新文件最后的访问时间。
+* `O_NONBLOCK`、`O_NDELAY`：将文件描述符设置为非阻塞的
+* `O_SYNC`：设置为 IO 同步模式，每次进行写操作时都会将数据同步到磁盘，然后 write 才能返回。
+* `O_TRUNC`：在打开文件的时候，将文件长度截断为 0，需要与 O_RDWR 或 O_WRONLY 同时使用。在写文件时，如果是作为新文件重新写入，一定要使用 O_TRUNC 标志，否则可能会造成旧内容依然存在于文件中的错误，如生成配置文件、pid 文件。
+
+打开文件时，内核主要消耗了两种资源：文件描述符与内核管理文件结构 file。
+
+### 3、如何选择文件描述符
+根据 POSIX 标准，当获取一个新的文件描述符时，要返回最低的未使用的文件描述符。
+
+
+### 4、文件描述符 fd 与文件管理结构 file
+暂略。
+
+
+## 3、creat 函数简介
+creat函数用于创建一个新文件，其等价于：
+```cpp
+open(pathname, O_WRONLY | O_CREAT | O_TRUNC, mode);
+```
+
+由于历史原因，早期的 open 第二个参数只能是 0、1、2，这样就无法打开一个不存在的文件。因此一个独立系统调用 creat 被引入，现在的 open 函数通过用 O_CREAT 和 O_TRUNC 选项，可以实现 creat 的功能。
+
+内核 creat 的实现代码如下所示：
+```cpp
+SYSCALL_DEFINE2(creat, const char __user *, pathname, int, mode)
+{
+    return sys_open(pathname, O_CREAT | O_WRONLY | O_TRUNC, mode);
+}
+```
+
+## 4、关闭文件
+
+1、**close 介绍**
+close 用于关闭文件描述符，可以是普通文件、也可以是设备，还可以是 socket。在关闭时，VFS 会根据不同的文件类型，执行不同的操作。
+
+
+
