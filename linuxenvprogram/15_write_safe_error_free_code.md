@@ -204,4 +204,51 @@ x is in 0 range!
 
 从数学的角度看，`float x=0.123-0.11-0.013`，得到的一定是 0。但对于浮点数来说，因为其不能精确地表示小数，因此x最终的结果是一个趋近于 0 的值。故而不能用 0 和 x 直接进行比较，而是要使用一个范围来确定 x 是否为 0。
 
+2、**两个特殊的浮点值**
+
+浮点数有两个特殊的值，一个是 NaN，另一个是 infinite，即无限。下边看一个示例：
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+int main(void) {
+    float x = 1 / 0.0;
+    printf("x is %f\n", x);
+    x = 0 / 0.0;
+    printf("x is %f\n", x);
+    return 0;
+}
+```
+输出结果为：
+```sh
+$ a.out
+x is inf
+x is -nan
+```
+
+当 1 除以 0.0 时，得到的是 infinite，而用 0 除以 0.0 时，得到的就是 NaN。虽然这里完全只是一则普通的除法运算，但也会产生 NaN 的情况。
+
+那么当使用除法运算时，对除数进行检查，保证其不为 0.0，是否就可以避免 NaN 了？再看下面的代码：
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+int main(void)
+{
+    float x;
+    while (1) {
+        scanf("%f", &x);
+        printf("x is %f\n", x);
+    }
+    return 0;
+}
+```
+编译执行：
+```sh
+$ ./a.out
+inf
+x is inf
+nan
+x is nan
+```
+
+令人惊讶的是，scanf 不仅接受 inf 和 nan 的输入，并将其视为浮点数的两种特殊值。那么对于 UI 程序来说，当遇到浮点数值的时候，我们必须首先判断其是否为合法的浮点值。C 库提供了两个库函数 isinf 和 isnan，分别用于判断浮点数是否为 infinite 和 NaN。
 
