@@ -118,3 +118,90 @@ c < d
 ```
 
 当 signed int 和 unsigned int 进行比较时，signed int 会被转换为 unsigned int。-1 的值即 0xFFFFFFFF，就被视为无符号整数的最大值，因此 a > b。C 标准规定，当进行整数提升时，如果 int 类型可以表示原始类型的所有值时，它就被转换为 short，那么它们就会被转换为 int 类型，则实际是对 (int) -1 和 (int) 2 进行比较，结果自然是 c < d。
+
+### 6、小心 volatile 的原子性误解
+关于 volatile 的说明，可以理解为易变的，防止编译器对其优化，因此用途一般由以下三种：
+* 外部设备寄存器映射后的内存 - 因为外部寄存器随时可能由于外部设备的状态变化而改变，因此映射后的内存需要用 volatile 来修饰。
+* 多线程或异步访问的全局变量
+* 嵌入式编程 -- 防止编译器对其优化
+
+经常会错误地理解第 2 种情况：认为 int 类型的加减操作是原子的，因此使用了 volatile 后就无须使用锁来进行竞争保护了，其实 volatile 只能保证在访问该变量时，每次都是从内存中读取最新值，并不会使用寄存器中缓存的值，而对变量的修改，volatile 并不提供原子性的保证。
+
+### 7、x==x 何时为假？
+```cpp
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    float x = 0xffffffff;
+    if (x == x) {
+        printf("Equal\n");
+    }
+    else {
+        printf("Not equal\n");
+    }
+    if (x >= 0) {
+        printf("x(%f) >= 0\n", x);
+    }
+    else if (x < 0) {
+        printf("x(%f) < 0\n", x);
+    }
+    int a = 0xffffffff;
+    memcpy(&x, &a, sizeof(x));
+    if (x == x) {
+        printf("Equal\n");
+    }
+    else {
+        printf("Not equal\n");
+    }
+    if (x >= 0) {
+        printf("x(%f) >= 0\n", x);
+    }
+    else if (x < 0) {
+        printf("x(%f) < 0\n", x);
+    }
+    else {
+        printf("Surprise x(%f)!!!\n", x);
+    }
+    return 0;
+}
+```
+
+简单解释下原因：
+* 当`float x=0xffffffff`时，将整数赋值给一个浮点数，由于 float 和 int 都占用了 4 字节，但浮点数的存储格式与整数不同，其需要一定的数位来作为小数位，所以 float 的表示范围要小于 int。这里涉及了 C 语言中的类型转换。
+* 当整数转换为浮点数时，尽管数值会有所变化，但结果一定是一个合法的浮点值。所以 x 一定等于 x，且 x 不是大于等于 0，就是小于 0。
+* 当使用 memcpy 将 0xff 填充到 x 的地址时，这时保证了x储存的一定是 0xffffffff，但很可惜它不是一个合法的浮点值，而是一个特殊值 NaN。
+* 作为一个非法的浮点数 NaN，当它与任何数值相比较时，都会返回假。所以就有了比较意外的结果 x==x 为假，x 即不大于 0，不小于 0，也不等于 0。
+
+
+### 8、小心浮点陷阱
+
+1、**浮点数的精度限制**
+
+浮点数的存储格式与整数完全不同。大部分的实现采用的是 IEEE 754 标准，float 类型是 1 个 sign bit、8 个 exponent bits 和 23 个 mantissa bits。而 double 类型是 1 个 sign bit、11 个 exponent bits 和 52 个 mantissa bits。关于浮点数是如何表示小数部分的，可以自行参考维基百科。简单来说，小数部分是依靠2的负多少次方来近似表示的，因此浮点数存在精度的问题，对浮点数进行比较时，要使用范围比较。
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+int main(void)
+{
+    float x = 0.123-0.11-0.013;
+    if (x == 0) {
+        printf("x is 0!\n");
+    }
+    if (-0.0000000001 < x && x < 0.0000000001) {
+        printf("x is in 0 range!\n");
+    }
+    return 0;
+}
+```
+输出结果：
+```sh
+$ gcc -Wall 15_8_float1.c
+$ ./a.out
+x is in 0 range!
+```
+
+从数学的角度看，`float x=0.123-0.11-0.013`，得到的一定是 0。但对于浮点数来说，因为其不能精确地表示小数，因此x最终的结果是一个趋近于 0 的值。故而不能用 0 和 x 直接进行比较，而是要使用一个范围来确定 x 是否为 0。
+
+
