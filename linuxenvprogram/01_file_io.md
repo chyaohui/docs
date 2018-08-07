@@ -77,6 +77,7 @@ SYSCALL_DEFINE2(creat, const char __user *, pathname, int, mode)
 ## 4、关闭文件
 
 1、**close 介绍**
+
 close 用于关闭文件描述符，可以是普通文件、也可以是设备，还可以是 socket。在关闭时，VFS 会根据不同的文件类型，执行不同的操作。
 
 
