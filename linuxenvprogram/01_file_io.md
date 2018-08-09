@@ -96,6 +96,7 @@ off_t lseek(int fd, off_t offset, int whence);
 * offset：取值正负均可
 * 返回值：lseek 执行成功后，会返回新的文件偏移量
 * 在 Linux 3.1 后，新增两个值：SEEK_DATA 和 SEEK_HOLE，分别用于查找文件中的数据和空洞。
+
 2、**小心 lseek 的返回值**
 
 对于 Linux 大部分系统调用来说，如果返回值是负数，那它一般都是错误的，但是对于 lseek 来说这条规则不适用，具体返回值说明：
