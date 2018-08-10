@@ -20,15 +20,17 @@ ip [ OPTIONS ] OBJECT { COMMAND | help }
 -r[esolve]：显示主机时，不使用IP地址，而使用主机的域名。
 ```
 
-1、**link常用命令**
+1、**链路 link 类常用命令**
 ```sh
-ip link set eth0 up/down
-ip link set eth0 arp on/off
-ip link set eth0 promisc on/off
-ip link set eth0 mtu 1500
-ip link show eth0
+ip link set eth0 up/down            # 设置 eth0 网卡为 Down/Up 状态
+ip link set eth0 arp on/off         # 设置 eth0 网卡的 NOARP 选项
+ip link set eth0 promisc on/off     # 设置 eth0 网卡的混杂模式
+ip link set eth0 mtu 1500           # 设置 eth0 网卡的 MTU 值
+ip link show eth0                   # 显示 eth0 网卡的 link 信息
 ```
 
+
+2、**地址 addr 类常用命令**
 
 
 ip addr
