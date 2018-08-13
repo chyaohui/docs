@@ -134,3 +134,18 @@ ssize_t write(int fd, const void *buf, size_t count);
 ```
 write 尝试从 buf 指向的地址，写入 count 个字节到文件描述符 fd 中，并返回成功写入的字节数，同时将文件偏移向前移动相同的字节数。write 有可能写入比指定 count 少的字节数。
 
+## 8、文件的原子读写
+* 使用 O_APPEND 可以实现在文件的末尾追加新数据，Linux 还提供 pread 和 pwrite 从指定偏移位置读取或写入数据。
+* pread 不会从文件表中获取当前偏移，而是直接使用用户传递的偏移量，并且在读取完毕后，不会更改当前文件的偏移量。
+
+## 9、文件描述符的复制
+Linux 提供了三个复制文件描述符的系统调用，分别为：
+```cpp
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+int dup3(int oldfd, int newfd, int flags);
+```
+* **dup** 会使用一个最小的未用文件描述符作为复制后的文件描述符。
+* **dup2** 是使用用户指定的文件描述符 newfd 来复制 oldfd 的。如果 newfd 已经是打开的文件描述符，Linux 会先关闭 newfd，然后再复制 oldfd。
+* 对于 **dup3**，只有定义了 feature 宏`_GNU_SOURCE`才可以使用，它比 dup2 多了一个参数，可以指定标志——不过目前仅仅支持 `O_CLOEXEC` 标志，可在 newfd 上设置 `O_CLOEXEC` 标志。定义 dup3 的原因与 open 类似，可以在进行 dup 操作的同时原子地将 fd 设置为 `O_CLOEXEC`，从而避免将文件内容暴露给子进程。
+
