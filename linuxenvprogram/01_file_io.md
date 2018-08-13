@@ -149,3 +149,63 @@ int dup3(int oldfd, int newfd, int flags);
 * **dup2** 是使用用户指定的文件描述符 newfd 来复制 oldfd 的。如果 newfd 已经是打开的文件描述符，Linux 会先关闭 newfd，然后再复制 oldfd。
 * 对于 **dup3**，只有定义了 feature 宏`_GNU_SOURCE`才可以使用，它比 dup2 多了一个参数，可以指定标志——不过目前仅仅支持 `O_CLOEXEC` 标志，可在 newfd 上设置 `O_CLOEXEC` 标志。定义 dup3 的原因与 open 类似，可以在进行 dup 操作的同时原子地将 fd 设置为 `O_CLOEXEC`，从而避免将文件内容暴露给子进程。
 
+## 10、文件数据的同步
+
+* 为了提高性能，操作系统会对文件的 IO 操作进行缓存处理。
+* 对于读操作，如果要读取的内容已经存在于文件缓存中，就直接读取文件缓存。
+* 对于写操作，会先将修改提交到文件缓存中，在合适的时机或过一段时间后，操作系统才会将改动提交到磁盘上。
+
+Linux 提供了三个同步接口：
+```cpp
+void sync(void);
+int fsync(int fd);
+int fdatasync(int fd);
+```
+* sync 是阻塞调用。
+* fsync 只同步 fd 指定的文件，并且直到同步完成才返回。不仅同步数据，还会同步所有被修改过的文件元数据
+* fdatasync 只同步文件的实际数据内容，和会影响后面数据操作的元数据。性能会优于 fsync。
+
+注：sync、fsync 和 fdatasync 只能保证 Linux 内核对文件的缓冲被冲刷了，并不能保证数据被真正写到磁盘上，因为磁盘也有自己的缓存。
+
+## 11、文件的元数据
+Linux 环境提供了三个获取文件信息的 API：
+```cpp
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+int stat(const char *path, struct stat *buf);
+int fstat(int fd, struct stat *buf);
+int lstat(const char *path, struct stat *buf);
+```
+* stat 得到 path 所指定的文件基本信息
+* fstat 得到文件描述符 fd 指定文件的基本信息
+* lstat 与 stat 基本相同，只有当 path 是一个链接文件时，lstat 得到的是链接文件本身而不是所指向文件的信息。
+
+所得到的文件基本信息的结果 struct stat 的结构如下：
+```cpp
+struct stat {
+dev_t st_dev;            /* ID of device containing file */
+ino_t st_ino;            /* inode number */
+mode_t st_mode;          /* protection */
+nlink_t st_nlink;        /* number of hard links */
+uid_t st_uid;            /* user ID of owner */
+gid_t st_gid;            /* group ID of owner */
+dev_t st_rdev;           /* device ID (if special file) */
+off_t st_size;           /* total size, in bytes */
+blksize_t st_blksize;    /* blocksize for file system I/O */
+blkcnt_t st_blocks;      /* number of 512B blocks allocated */
+time_t st_atime;         /* time of last access */
+time_t st_mtime;         /* time of last modification */
+time_t st_ctime;         /* time of last status change */
+};
+```
+
+## 12、文件截断
+Linux 提供了两个截断文件的 API：
+```cpp
+int truncate(const char *path, off_t length);
+int ftruncate(int fd, off_t length);
+```
+* length 可以大于文件本身的大小，这时文件长度将变为 length 的大小，扩充的内容均被填充为 0。
+* 我们日常编码中，在写入文件时如果并不需要旧数据，要在打开文件时就要强制截断文件，提高代码的健壮性。
+
