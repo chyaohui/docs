@@ -81,5 +81,44 @@ ipvsadm -d -t <vip>:<vport> -r <rip>:<rport>
 $ ipvsadm -d -t 1.1.1.1:80 -r 192.168.1.1:80
 ```
 
+
+###　7、新增LocalAddress
+命令格式：
+```
+ipvsadm -P -t <vip>:<vport> -z <localAddress>
+```
+示例：
+```sh
+# 为 vip 1.1.1.1 的 LVS 添加一个 192.168.1.1 的 localAddress
+$ ipvsadm -P -t 1.1.1.1:80 -z 192.168.1.2
+```
+
+### 8、删除LocalAddress
+命令格式：
+```
+ipvsadm -Q -t <vip>:<vport> -z <LocalAddress>
+```
+示例：
+```sh
+# 删除 vip 为 1.1.1.1 的 LVS 对应的 IP 为 192.168.1.2 的 LocalAddress
+$ ipvsadm -Q -t 1.1.1.1:80 -z 192.168.1.2
+```
+
+### 9、查看LocalAddress
+命令格式：
+```
+ipvsadm -G -t <vip>:<vport>
+ipvsadm -G
+```
+
+示例：
+```sh
+# 查看所有的 VIP 对应的 LocalAddress
+$ ipvsadm -G
+# 查看所有的 VIP 为 1.1.1.1 的 LVS 对应的 LocalAddress
+$ ipvsadm -G -t 1.1.1.1:80
+```
+
+
 ## 二、ipvsadm命令参数详解
 
