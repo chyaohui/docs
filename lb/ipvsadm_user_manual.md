@@ -81,7 +81,6 @@ ipvsadm -d -t <vip>:<vport> -r <rip>:<rport>
 $ ipvsadm -d -t 1.1.1.1:80 -r 192.168.1.1:80
 ```
 
-
 ###　7、新增LocalAddress
 命令格式：
 ```
