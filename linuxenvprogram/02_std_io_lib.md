@@ -43,3 +43,13 @@ int main(void)
 |a+|O_RDWR \| O_APPEND \| O_CREAT|追加读写的方式打开文件，文件不存在时创建文件|
 |b|无|表示打开的文件是二进制流而不是文本流|
 
+## 3、其它
+* fdopen 与 fileno
+* 同时读写的痛苦
+* ferror 的返回值
+* clearerr 的用途
+* 小心 fgetc 和 getc
+* 注意 fread 和 fwrite 的返回值
+* 创建临时文件，推荐用 tmpfile 和 mkstemp
+
+
