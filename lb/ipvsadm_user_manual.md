@@ -44,6 +44,42 @@ ipvsadm -D -f fwmark
 $ ipvsadm -D -t 1.1.1.1:80
 ```
 
+### 4、新增RealServer
+命令格式：
+```
+ipvsadm -a -t <vip>:<vport> -r <rip>:<rport> <forward mode>
+forward mode : -b(FNAT) | -m(NAT) | -g(DR) | -i(TUNNEL)
+```
+
+示例：
+```sh
+# FULLNAT 模式
+$ ipvsadm -a -t 1.1.1.1:80 -r 192.168.1.2:80 -b -w 1
+```
+
+### 5、修改RealServer
+命令格式：
+```
+ipvsadm -e -t <vip>:<vport> -r <rip>:<rport> <forward> -w weight
+```
+
+示例：
+```sh
+# 修改 RealServer 模式为 DR，权重为 12
+$ ipvsadm -e -t 1.1.1.1:80 -r 192.168.0.1:80 -g -w 12
+```
+
+### 6、在LVS上删除一个RealServer
+命令格式：
+```
+ipvsadm -d -t <vip>:<vport> -r <rip>:<rport>
+```
+
+示例：
+```sh
+# 删除 vip 为 1.1.1.1 对应的 RealServer 192.168.1.1
+$ ipvsadm -d -t 1.1.1.1:80 -r 192.168.1.1:80
+```
 
 ## 二、ipvsadm命令参数详解
 
