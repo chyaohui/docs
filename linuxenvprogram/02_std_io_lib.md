@@ -37,9 +37,9 @@ int main(void)
 |:-----:|:-----:|-----|
 |r|O_RD_ONLY|以只读方式打开文件|
 |r+|O_RDWR|以读写方式打开文件|
-|w|`O_WRONLY|O_CREAT|O_TRUNC`|写方式打开文件，文件存在截断为0，不存在则创建文件|
-|w+|`O_RDWR|O_CREAT|O_TRUNC`|读写方式打开文件，文件存在截断为0，不存在则创建文件|
-|a|`O_WRONLY+O_APPEND+O_CREAT`|追加写的方式打开文件，文件不存在时创建文件|
-|a+|`O_RDWR+O_APPEND+O_CREAT`|追加读写的方式打开文件，文件不存在时创建文件|
+|w|O_WRONLY\|O_CREAT\|O_TRUNC|写方式打开文件，文件存在截断为0，不存在则创建文件|
+|w+|O_RDWR|O_CREAT|O_TRUNC|读写方式打开文件，文件存在截断为0，不存在则创建文件|
+|a|O_WRONLY+O_APPEND+O_CREAT|追加写的方式打开文件，文件不存在时创建文件|
+|a+|O_RDWR+O_APPEND+O_CREAT|追加读写的方式打开文件，文件不存在时创建文件|
 |b|无|表示打开的文件是二进制流而不是文本流|
 
