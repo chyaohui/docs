@@ -120,5 +120,19 @@ $ ipvsadm -G -t 1.1.1.1:80
 ```
 
 
+### 10、查看所有LVS对应RealServer
+示例：
+```sh
+# 查看 LVS 以及对应的 RealServer (不解析 IP 和 PORT)
+$ ipvsadm -ln
+```
+
+### 11、清空所有Service
+示例：
+```sh
+$ ipvsadm -C
+```
+
+
 ## 二、ipvsadm命令参数详解
 
