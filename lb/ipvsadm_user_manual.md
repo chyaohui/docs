@@ -136,7 +136,7 @@ $ ipvsadm -C
 
 ## 二、ipvsadm命令参数详解
 ### 1、用法
-```
+```sh
 Usage:
   ipvsadm -A|E -t|u|f service-address [-s scheduler] [-j eanble/disable] [-p [timeout]] [-M netmask]
   ipvsadm -D -t|u|f service-address
