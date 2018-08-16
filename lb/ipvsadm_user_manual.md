@@ -1,4 +1,4 @@
-> ipvsadm 使用手册
+> ipvsadm 使用手册说明。ipvsadm 是用来管理 LVS 集群配置的，运行在用户态空间，而 LVS 是运行在内核态的。ipvsadm 通过调用 `libipvs` 库以 `raw socket` 或 `netlink` 的通信方式向 LVS 下发配置信息的，功能与 keepalived 对 LVS 的配置管理功能是完全一样的。ipvsadm 之与 LVS 的关系，就像 iptables 之与 netfilter 的关系。
 
 ## 一、ipvsadm常用命令
 ### 1、在LVS上新增service
