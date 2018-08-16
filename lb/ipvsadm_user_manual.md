@@ -135,4 +135,78 @@ $ ipvsadm -C
 
 
 ## 二、ipvsadm命令参数详解
+### 1、用法
+```
+Usage:
+  ipvsadm -A|E -t|u|f service-address [-s scheduler] [-j eanble/disable] [-p [timeout]] [-M netmask]
+  ipvsadm -D -t|u|f service-address
+  ipvsadm -C
+  ipvsadm -R
+  ipvsadm -S [-n]
+  ipvsadm -P|Q -t|u|f service-address -z local-address
+  ipvsadm -G -t|u|f service-address 
+  ipvsadm -a|e -t|u|f service-address -r server-address [options]
+  ipvsadm -d -t|u|f service-address -r server-address
+  ipvsadm -L|l [options]
+  ipvsadm -Z [-t|u|f service-address]
+  ipvsadm --set tcp tcpfin udp
+  ipvsadm --start-daemon state [--mcast-interface interface] [--syncid sid]
+  ipvsadm --stop-daemon state
+  ipvsadm -h
+```
+
+
+### 2、命令
+命令格式支持长选项和短选项的格式：
+```sh
+--add-service     -A        在内核的虚拟服务器表中添加一条新的虚拟服务器记录
+--edit-service    -E        编辑内核虚拟服务器表中的一条虚拟服务器记录
+--delete-service  -D        删除内核虚拟服务器表中的一条虚拟服务器记录
+--clear           -C        清除内核虚拟服务器表中的所有记录
+--save            -S        保存虚拟服务器规则，输出为-R 选项可读的格式
+--restore         -R        恢复虚拟服务器规则(标准输入读取)
+--add-laddr       -P        为 Service 添加 LocalAddress (仅 FULLNAT)
+--del-laddr       -Q        为 Service 删除 LocalAddress (仅 FULLNAT)
+--get-laddr       -G        查看 Service 的 LocalAddress (仅 FULLNAT)
+--add-server      -a        在内核虚拟服务器表的一条记录里添加一条新的真实服务器记录
+--edit-server     -e        编辑一条虚拟服务器记录中的某条真实服务器记录
+--delete-server   -d        删除一条虚拟服务器记录中的某条真实服务器记录
+--list            -L|-l     显示内核虚拟服务器表
+--zero            -Z        虚拟服务表计数器清零，清空当前的连接数量等
+--set tcp tcpfin udp        设置连接超时值
+--start-daemon              启动同步守护进程，可以是 master 或 backup
+--stop-daemon               停止同步守护进程
+```
+
+
+### 3、选项
+```sh
+--tcp-service  -t vip:vport     说明虚拟服务器提供的是 tcp 的服务
+--udp-service  -u vip:vport     说明虚拟服务器提供的是 udp 的服务
+--fwmark-service  -f fwmark     说明是经过iptables 标记过的服务类型
+--scheduler    -s scheduler     one of rr|wrr|lc|wlc|lblc|lblcr|dh|sh|sed|nq,
+                                默认调度方式是：wlc.
+--persistent   -p [timeout]     来自同一个客户的多次请求，将被同一台真实的服务器处理
+                                默认：300s
+--netmask      -M netmask       persistent granularity mask
+--real-server  -r rip:rport     真实的服务器
+--gatewaying   -g               指定LVS 的工作模式为直接路由模式
+--ipip         -i               指定LVS 的工作模式为隧道模式
+--fullnat      -b               指定LVS 的工作模式为 FULLNAT 模式
+--masquerading -m               指定LVS 的工作模式为NAT 模式
+--weight       -w weight        真实服务器的权值
+--u-threshold  -x uthreshold    upper threshold of connections
+--l-threshold  -y lthreshold    lower threshold of connections
+--mcast-interface interface     指定组播的同步接口
+--syncid sid                    syncid for connection sync (default=255)
+--connection   -c               显示 LVS 目前的连接
+--timeout                       显示 tcp tcpfin udp 的 timeout 值
+--daemon                        显示同步守护进程状态
+--stats                         显示统计信息
+--rate                          显示速率信息
+--thresholds                    output of thresholds information
+--persistent-conn               output of persistent connection info
+--sort                          对虚拟服务器和真实服务器排序输出
+--numeric      -n               输出IP 地址和端口的数字形式
+```
 
