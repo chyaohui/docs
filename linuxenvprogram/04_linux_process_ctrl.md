@@ -253,6 +253,7 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 3、**执行exec后进程继承的属性**
 
 调用 exec 之后进程保持的属性：
+
 |属性|相关的函数|属性|相关的函数|
 ---|---|---|---
 |进程ID|getpid|根目录| |
