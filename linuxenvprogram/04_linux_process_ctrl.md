@@ -1,4 +1,4 @@
-> 进程是操作系统的一个核心概念，每个进程都有自己唯一的标识：进程 ID，也有自己的声明周期。
+> 进程是操作系统的一个核心概念，每个进程都有自己唯一的标识：进程 ID，也有自己的生命周期。
 
 ## 1、进程ID
 每个进程都会有一个非负整数表示的唯一进程 ID，可以使用 getpid 函数来获取进程的 pid。每个进程都有自己的父进程，父进程又会有自己的父进程，最终都会追溯到 1 号 init 进程。
@@ -221,5 +221,62 @@ if(execve("/bin/ls",args, NULL) == -1) {
 * EACCESS：第一个参数 filename，不是普通文件，或该文件没有可执行的权限。
 * ENOENT：文件不存在。
 * ETXTBSY：存在其它进程尝试修改 filename 所指代的文件。
+* ENOEXEC：文件存在，也可执行，但是无法执行，比如 Windows 下的可执行程序。
 
+
+2、**exec家族**
+从内核角度来说，提供 execve 系统调用就足够了，但是从应用层编程的角度来讲，execve 函数就不那么好使了。
+* 第 1 个参数必须是绝对路径或当前工作目录的相对路径，不能使用 PATH。
+* 第 3 个参数是环境变量指针数组，得自己负责维护环境变量
+
+```cpp
+int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const char *path, const char *arg, ..., char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+int execve(const char *path, char *const argv[], char *const envp[]);
+```
+
+六个函数本质上都是调用 execve 函数，分为上下两个半区，分类依据是参数采用列表(l, 表示list)还是数组(v, 表示vector)。带 p 的表示可以使用环境变量 PATH，带 e 的表示要自己维护环境变量，而不使用当前的环境变量。
+
+|函数名|参数格式|是否自动搜索PATH|是否使用当前环境变量|
+---|---|---|---
+|execl|列表|不是|是|
+|execlp|列表|是|是|
+|execle|列表|不是|不是，需自己组装环境变量|
+|execv|数组|不是|是|
+|execvp|数组|是|是|
+|execve|数组|不是|不是，需自己组装环境变量|
+
+
+3、**执行exec后进程继承的属性**
+
+调用 exec 之后进程保持的属性：
+|属性|相关的函数|属性|相关的函数|
+---|---|---|---
+|进程ID|getpid|根目录||
+|父进程ID|getppid|文件模式创建掩码|umask|
+|进程组ID|getpgid|文件锁和记录锁|flock 和 fcntl|
+|会话ID|getsid|进程信号屏蔽|sigprocmask|
+|控制终端|tcgetpgrp|进程挂起的信号|sigpending|
+|真实用户ID|getsid|已用的时间|times|
+|真实组ID|getgid|资源限制|getrlimit、setrlimit|
+|附加组ID|getgroups|nice值|nice|
+|告警剩余时间|alarm|semadj值|semop|
+|当前工作目录|getcwd|||
+
+
+
+## 9、system函数
+
+1、**system函数接口**
+
+system 函数的缺点是很明显的。首先是效率，一般要创建两个进程，一个是 shell 进程，另外一个或多个是用于 shell 所执行的命令，如果对效率要求较高，最好是自己直接调用 fork 和 exec 来执行既定的程序。
+
+system 函数的返回值：
+* 当 command 为 NULL 时，返回 0 或 1
+* 创建进程失败，或获取子进程终止状态失败，则返回 -1。
+* 如果子进程不能执行 shell，那么 system 返回值会与 _exit(127)终止时一样
+* 如果所有的系统调用都执行成功，system 函数就会返回执行 command 的子 shell 的终止状态。
 
