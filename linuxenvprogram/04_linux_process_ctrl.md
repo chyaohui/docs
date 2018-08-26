@@ -255,7 +255,7 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 调用 exec 之后进程保持的属性：
 |属性|相关的函数|属性|相关的函数|
 ---|---|---|---
-|进程ID|getpid|根目录||
+|进程ID|getpid|根目录| |
 |父进程ID|getppid|文件模式创建掩码|umask|
 |进程组ID|getpgid|文件锁和记录锁|flock 和 fcntl|
 |会话ID|getsid|进程信号屏蔽|sigprocmask|
@@ -264,7 +264,7 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 |真实组ID|getgid|资源限制|getrlimit、setrlimit|
 |附加组ID|getgroups|nice值|nice|
 |告警剩余时间|alarm|semadj值|semop|
-|当前工作目录|getcwd|||
+|当前工作目录|getcwd| | |
 
 
 
