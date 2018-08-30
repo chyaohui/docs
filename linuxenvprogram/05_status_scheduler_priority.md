@@ -91,3 +91,42 @@ PID WCHAN CMD
 进程但凡需要休眠，必然是等待某种资源或等待某个事件，内核必须想办法将进程与它等待的资源或事件关联起来，当等待的资源可用或事件发生时，可以及时唤醒相关的进程，内核采用的方法是等待队列。
 
 如果存在多个进程在等待同一个条件满足或同一事件发生，那么当条件满足时，应该把所有进程一并唤醒还是只唤醒某一个或多个进程？答案是具体情况具体分析，比如多个进程等待临界区资源，当锁的持有者释放锁时，如果内核将所有等待该锁的进程一起唤醒，那么最终也只能有一个进程竞争到锁资源，而大多数的竞争者不过是从休眠中醒来，然后又继续休眠，这会浪费 CPU 资源，如果等待队列中的进程数目很大，还会严重影响性能。这就是所谓的惊群效应(thundering herd problem)
+
+
+1.1.4 **TASK_KILLABLE状态**
+
+内核自 2.6.25 版本引入一种新的状态即 TASK_KILLABLE 状态。可中断的睡眠状态太容易被信号打断，与之对应，不可中断的睡眠状态完全不可以被信号打断，又容易失控，两者都比较极端。而内核新引入的 TASK_KILLABLE 状态则介入两者之间，是一种调和状态。该状态行为上类似于 TASK_UNINTERRUPTIBLE 状态，但是进程收到致命信号时，进程会被唤醒。
+
+
+1.1.5 **TASK_STOPPED和TASK_TRACED**
+
+TASK_STOPPED 状态是一种比较特殊的状态，SIGSTOP 等信号可以将进程暂时停止，SIGSTOP 具有和 SIGKILL 类似的属性，不能忽略，不能安装新的信号处理函数，不能屏蔽。当处于 TASK_STOPPED 状态的进程收到 SIGCONT 信号后，可以恢复进程的执行。
+
+TASK_TRACED 是被跟踪的状态，进程会停下来等待跟踪它的进程对它进行进一步的操作，当使用 gdb 调试程序，当进程在断点处停下来时，此时进程处于该状态。
+
+
+1.1.6 **EXIT_ZOMBIE和EXIT_DEAD**
+
+两种状态的区别，如果父进程没有将 SIGCHLD 信号的处理函数重设为 SIG_IGN，或没为 SIGCHLD 设置 SA_NOCLDWAIT 标志位，那么子进程退出后，会进入僵尸状态等待父进程或 init 收尸，否则直接进入 EXIT_DEAD。
+
+### 2、观察进程状态
+
+通过 proc 文件系统中，可以查看进程的状态：
+```sh
+$ cat /proc/7204/status | grep "State:"
+State:	S (sleeping)
+```
+
+|procfs 中的值|进程状态|
+---|---
+|R(running)|TASK_RUNNING|
+|s(sleeping)|TASK_INTERRUPTIBLE|
+|D(disk sleep)|TASK_UNINTERRUPTIBLE|
+|t(stopped)|TASK_STOPPED|
+|t(tracing stop)|TASK_TRACED|
+|Z(zombie)|EXIT_DEAD|
+|X(dead)|EXIT_DEAD|
+
+
+
+
