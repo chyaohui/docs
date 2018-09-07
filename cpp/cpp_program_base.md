@@ -196,14 +196,14 @@ extern "C" {
 - 重载导致C和C++相互调用会出现链接时名字不匹配，而发生调用错误
 
 C调用C++代码：
-```cpp
+```
 a. 定义一个头文件: mymath.h 不需要 extern "C"
 b. 编写被调函数的实现: mymath.cpp extern "C" int add(int a,int b) { ... }
 c. 编写主调函数main并调用，调用cpp函数，加上头文件可以
 d. g++ test.cpp -c -otest; gcc main.c -omain test; ./main
 ```
 C++调用C代码：
-```cpp
+```
 a. 定义一个头文件: mymath.h 需要加 extern "C" int add(int a,int b);
 b. 编写被调函数的实现: mymath.c 不需要加extern "C"，因为.c函数本身生成代码不会改名字
 c. 编写主调函数main.cpp并调用，加上include "mymath.h" 因为头文件中声明了extern "C";
