@@ -279,6 +279,47 @@ int operator++(int);        /* 这是后++ */
 - 稀少被调用的复杂函数(>200 行)和递归函数都不适合内联
 
 
+## 九、C++动态内存分配
+* new/delete 是运算符不是函数，功能是由编译器内置的。
+* 仍可以继续使用标准 C 库函数 malloc/calloc/realloc
+* 使用 new/delete 操作符在堆中分配/释放内存
+```cpp
+int *pi = new int; *pi = 1234; count << *pi << endl; delete pi;
+```
+* 在分配内存的同时为内存初始化
+```cpp
+int *p = new int(999); count << *p << endl; delete p;
+```
+* 以数组方式分配 new[]，也要以数组方式释放 delete[]
+```cpp
+int *p = new int[4];    /* 分配内存不一定清0，视编译器而定 */
+delete[] p;             /* 释放内存时用 delete[]，与 new 配对使用 */
+```
+* 分配数组并初始化
+```cpp
+int *p = new int[4] {10, 20, 30, 40};
+delete[] p;
+```
+分配数组并初始化必须要用 C++ 11 标准来支持，编译时 `g++ new.cpp -std=c++0x` 或 `std=gnu+0x`
+
+* 通过 new 操作符分配 N 维数组
+```cpp
+int (*p) [4] = new int[3][4]    // 返回数组指针
+int (*p) [4] = new int[3][4] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+```
+
+* 释放内存 delete
+  - 释放多次会出现 `double free` 的错误
+  - 分配多少内存，就释放多少内存，不要试图只释放部分内存
+  - 数组内存释放：delete[]，不要忘记 `[]`
+  - 不能通过 delete 释放已释放过的内存
+  - delete 野指针后果未定义，delete 空指针是安全的。
+  - 内存分配失败，new 操作符抛出 bad_alloc 异常，一般原因是内存不足
+
+
+## 十、C++的引用
+
+
 
 
 
