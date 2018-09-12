@@ -380,16 +380,16 @@ int *p; char *buf = char *(p);
 void *p; int *buf = static_cast<void *>(p);
 ```
 * 动态类型转换
-  - dynamic_cast<目标类型>(源类型变量)
+  - `dynamic_cast<目标类型>(源类型变量)`
   - 多态父子类指针或引用之间的转换
 * 常类型转换
-  - const_cast<目标类型>(源类型变量)
+  - `const_cast<目标类型>(源类型变量)`
   - 去除指针或引用上的 const 属性，只能在同类型之间的数据类型转换
 ```cpp
 const int *p1; int *p2 = const_cast<int *>(p1);
 ```
 * 重解释类型转换
-  - reinterpret_cast<>(源类型变量))
+  - reinterpret_cast<目标类型>(源类型变量))
   - 任意类型的指针或引用之间的转换。
   - 任意类型的指针和整数之间的转换。
   - C、C++ 的显式类型转换是编译器什么都不检查。
