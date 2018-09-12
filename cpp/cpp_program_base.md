@@ -373,23 +373,21 @@ int *p; char *buf = (char *)p;
 int *p; char *buf = char *(p);
 ```
 * 静态类型转换
+  - `void *p; int *buf = static_cast<void *>(p);`
   - 其它类型指针可以隐式转换为 void* 类型，但 void* 不可以隐式转换别的类型
   - 隐式类型转换的逆转换
   - 自定义类型转换。如果在类型转换构造函数前加 explicit 表示进行显式类型转换，那么在进行对象类型转换构造时，需要显式的用 static_cast 进行转换
-```cpp
-void *p; int *buf = static_cast<void *>(p);
-```
+
 * 动态类型转换
   - `dynamic_cast<目标类型>(源类型变量)`
   - 多态父子类指针或引用之间的转换
 * 常类型转换
+  - `const int *p1; int *p2 = const_cast<int *>(p1);`
   - `const_cast<目标类型>(源类型变量)`
   - 去除指针或引用上的 const 属性，只能在同类型之间的数据类型转换
-```cpp
-const int *p1; int *p2 = const_cast<int *>(p1);
-```
+
 * 重解释类型转换
-  - reinterpret_cast<目标类型>(源类型变量))
+  - `reinterpret_cast<目标类型>(源类型变量)`
   - 任意类型的指针或引用之间的转换。
   - 任意类型的指针和整数之间的转换。
   - C、C++ 的显式类型转换是编译器什么都不检查。
@@ -401,7 +399,7 @@ const int c = 100;
 int *p = const_cast<int *>(&c);
 *p = 200;
 cout << *p << endl;   // 200
-cout << c << endl;    // 100 加 volatile 后结果为 200
+cout << c << endl;    // 结果：100。加 volatile 后结果为 200
 ```
 编译器会把 const 修饰的 c 变量进行优化，在以后的代码中遇到 c 变量就会以字面常量 10 去替换所有的 c 变量，增加 volatile 关键字后对 const 的优化取消，允许以其它方式改变 c 在内存的值，以后每次都从内存中直接取值，取消编译器的优化。
 
