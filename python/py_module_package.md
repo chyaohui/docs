@@ -79,3 +79,40 @@ print(sys.path)
 * 模块在被导入执行时，Python 解释器为加快程序的启动速度，会在与模块文件同一目录下生成 `.pyc` 文件，而 `.pyc` 是经过编译后的字节码，这一工作会自动完成。
 
 
+## Python包
+
+**1、包的概念**
+
+在 Python 中，包其实就是一个目录。在创建较多模块后，我们希望将某些功能相近的文件组织到同一目录下，就是包的概念了。包目录下包含一个 __init__.py 文件，然后是一些模块文件和子目录，加入子目录中也有 __init__.py 那么它就是这个包的子包。
+
+**2、文件__init__.py**
+
+包的目录下需要包含 __init__.py 文件，主要是为了作为包的标识，且可以避免将文件夹名当作普通的字符串。__init__.py 的内容可以为空，一般用来进行包的某些初始化工作或设置 __all__ 值。
+```python
+# __init__.py
+__all__ = ['module1', 'module2']
+```
+设置 __all__ 后，执行 `from package import *` 指令时，会导入 __all__ 列表中指定的模块。总结 __init.py__ 两个作用：
+
+* Python 中作为包的标识
+* 定义 __all__ 用来模糊导入
+
+
+**3、包的导入**
+
+可以从包中导入单独的模块：
+
+* import 语法。
+  ```python
+  import package1.subpackage.module
+  # 最后一个 item 必须是包，不能是类、函数、变量
+  # 使用时必须用全路径名。
+  ```
+* from + import 语法。
+  ```python
+  from package1.subpackage import module
+  # import 后的 item 可以是模块或包，也可以是类、函数、变量
+  ```
+* from package import * 模糊导入。
+  如果包的 __init__.py 定义了变量 __all__, 它包含的模块名字的列表将作为被导入的模块列表。如果没有定义 __all__，这条语句不会导入所有的 package 的子模块，只保证包被导入。
+
