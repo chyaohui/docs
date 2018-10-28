@@ -2,7 +2,7 @@
 
 ## Python模块
 
-*1、*什么是模块**
+**1、什么是模块**
 
 在 Python 中，一个 PY 文件就是一个模块，如：foo.py，模块 foo。模块中一般会定义一些函数、变量等。
 
@@ -56,21 +56,21 @@ print(sys.path)
 
 实际项目中有时需要添加模块的搜索路径，可以使用如下几种方式：
 
-* 动态增加路径。临时生效，对于不经常使用的模块，这通常是最好的方式，因为不必用所有次要的模块的路径来污染 `PYTHONPATH`。
+* **动态增加路径。**临时生效，对于不经常使用的模块，这通常是最好的方式，因为不必用所有次要的模块的路径来污染 `PYTHONPATH`。
   ```python
   sys.path.append('/home/lee/workspace')
   ```
-* 修改 `PYTHONPATH` 变量。永久生效，对于在许多程序中都使用的模块，可以采用这种方式。这将改变所有 Python 应用的搜索路径，因为启动 Python 时，它会读取这个变量，甚至不同版本的 Python 都会受影响。
+* **修改 `PYTHONPATH` 变量。**永久生效，对于在许多程序中都使用的模块，可以采用这种方式。这将改变所有 Python 应用的搜索路径，因为启动 Python 时，它会读取这个变量，甚至不同版本的 Python 都会受影响。
   ```bash
   $ vim ~/.bashrc
   export PYTHONPATH=$PYTHONPATH:/home/lee/workspace
   $ source ~/.bashrc
   ```
-* 增加 `.pth` 文件。永久生效，这是最简单的、也是推荐的方式。Python 在遍历已知的库文件目录过程中，如果遇到 `.pth` 文件，便会将其中的路径加入到 `sys.path` 中，于是 `.pth` 中所指定的路径就可以被 Python 运行环境找到了。
+* **增加 `.pth` 文件。**永久生效，这是最简单的、也是推荐的方式。Python 在遍历已知的库文件目录过程中，如果遇到 `.pth` 文件，便会将其中的路径加入到 `sys.path` 中，于是 `.pth` 中所指定的路径就可以被 Python 运行环境找到了。
   ```bash
   $ vim /usr/local/lib/python3.5/site-packages/lvs.pth
   /home/lee/workspace
-  # 在上述目录下添加一个扩展名为 `.pth` 文件
+  # 在上述目录下添加一个扩展名为 .pth 文件
   ```
 
 **7、import时执行语句**
