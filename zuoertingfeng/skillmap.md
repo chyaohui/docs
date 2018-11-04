@@ -336,7 +336,7 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 * 《[Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)》
 * [The Twelve-Factor App](https://12factor.net/)，[中文版](https://12factor.net/zh_cn/) - 架构师必读
 * [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8) - 避免过度设计系统
-* [Instagram Engineering’s 3 rules to a scalable cloud application architecture](https://medium.com/@DataStax/instagram-engineerings-3-rules-to-a-scalable-cloud-application-architecture-c44afed31406)。Instagram 工程的三个黄金法则：
+* [Instagram Engineering's 3 rules to a scalable cloud application architecture](https://medium.com/@DataStax/instagram-engineerings-3-rules-to-a-scalable-cloud-application-architecture-c44afed31406)。Instagram 工程的三个黄金法则：
   - 使用稳定可靠的技术(迎接新的结束)
   - 不要重新发明轮子
   - Keep it very simple
@@ -385,7 +385,7 @@ C、实现一个生产者 / 消费者消息队列服务，主要有以下需求�
 然后后是几篇和内存相关的论文，对于程序的性能优化方面有帮助。
 * [Memory Barriers: a Hardware View for Software Hackers](http://irl.cs.ucla.edu/~yingdi/web/paperreading/whymb.2010.06.07c.pdf)。内存的读写屏障是线程并发访问共享的内存数据时，从程序本身、编译器到 CPU 都必须遵循的一个规范。有了这个规范，才能保证访问共享的内存数据时，一个线程对该数据的更新能被另一个线程以正确的顺序感知到。在 SMP（对称多处理）这种类型的多处理器系统（包括多核系统）上，这种读写屏障还包含了复杂的缓存一致性策略。这篇文章做了详细解释。
 * [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](http://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)，对 ARM 和 POWER 的宽松内存模型的一个教程式的简介。
-* [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](http://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)，介绍 x86 的多处理器内存并发访问的一致性模型 TSO。
+* [x86-TSO: A Rigorous and Usable Programmer's Model for x86 Multiprocessors](http://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)，介绍 x86 的多处理器内存并发访问的一致性模型 TSO。
 
 接下来是内存管理方面的 lib 库，通常来说，我们有三种内存分配管理模块，就目前而言，BSD 的 jemalloc 有很大的影响力。
 * [ptmalloc](http://www.malloc.de/en/) 是 glibc 的内存分配管理。
@@ -435,11 +435,11 @@ Tunnel 相关协议：
 * [RFC 813 - Window and Acknowledgement Strategy in TCP](https://tools.ietf.org/html/rfc813) - TCP 窗口与确认策略，并讨论了在使用该机制时可能遇到的问题及解决方法。
 * [RFC 879 - The TCP Maximum Segment Size and Related Topics](https://tools.ietf.org/html/rfc879) - 讨论 MSS 参数对控制 TCP 分组大小的重要性，以及该参数与 IP 分段大小的关系等。
 * [RFC 896 - Congestion Control in IP/TCP Internetworks](https://tools.ietf.org/html/rfc896) - 讨论拥塞问题和 TCP 如何控制拥塞。
-* [RFC 2581 - TCP Congestion Control](https://tools.ietf.org/html/rfc2581) - 描述用于拥塞控制的四种机制：慢启动、拥塞防御、快重传和快恢复。后面这个 RFC 被 [RFC 5681](https://tools.ietf.org/html/rfc5681) 所更新。还有 [RFC 6582 - The NewReno Modification to TCP’s Fast Recovery Algorithm](https://tools.ietf.org/html/rfc6582) 中一个改进的快速恢复算法。
+* [RFC 2581 - TCP Congestion Control](https://tools.ietf.org/html/rfc2581) - 描述用于拥塞控制的四种机制：慢启动、拥塞防御、快重传和快恢复。后面这个 RFC 被 [RFC 5681](https://tools.ietf.org/html/rfc5681) 所更新。还有 [RFC 6582 - The NewReno Modification to TCP's Fast Recovery Algorithm](https://tools.ietf.org/html/rfc6582) 中一个改进的快速恢复算法。
 * [RFC 2018 - TCP Selective Acknowledgment Options](https://tools.ietf.org/html/rfc2018) - TCP 的选择确认。
 * [RFC 2883 - An Extension to the Selective Acknowledgement (SACK) Option for TCP](https://tools.ietf.org/html/rfc2883) - 对于 RFC 2018 的改进。
-* [RFC 2988 - Computing TCP’s Retransmission Timer](https://tools.ietf.org/html/rfc2988) - 讨论与 TCP 重传计时器设置相关的话题，重传计时器控制报文在重传前应等待多长时间。也就是经典的 TCP Karn/Partridge 重传算法。
-* [RFC 6298 - Computing TCP’s Retransmission Timer](https://tools.ietf.org/html/rfc6298) - TCP Jacobson/Karels Algorithm 重传算法。
+* [RFC 2988 - Computing TCP's Retransmission Timer](https://tools.ietf.org/html/rfc2988) - 讨论与 TCP 重传计时器设置相关的话题，重传计时器控制报文在重传前应等待多长时间。也就是经典的 TCP Karn/Partridge 重传算法。
+* [RFC 6298 - Computing TCP's Retransmission Timer](https://tools.ietf.org/html/rfc6298) - TCP Jacobson/Karels Algorithm 重传算法。
 * [Congestion Avoidance and Control](http://ee.lbl.gov/papers/congavoid.pdf) - 个人觉得 TCP 最牛的不是不丢包，而是拥塞控制，可以读一下经典论文
 * [TCP 的 man page](http://man7.org/linux/man-pages/man7/tcp.7.html) - 关于 Linux 下的 TCP 参数，你需要仔仔细细地读一下
 
