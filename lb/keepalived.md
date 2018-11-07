@@ -51,6 +51,13 @@ rpmbuild 参数说明：
 * -ta: 编译 srpm 和 rpm，通过指定参数 xxx.tar.gz 压缩包
 * -ba: 编译 srpm 和 rpm，通过指定参数 xxx.spec 文件
 
+
+在 CentOS5 上打包 rpm：
+* 主机："lvs.147.g1.se" - "172.16.194.147"
+* 打包方式：rpm -ba /usr/src/redhat/SPECS/keepalived.spec
+* 源码包存放位置：/usr/src/redhat/SOURCES/keepalived_LVS-1.2.2.tar.gz
+* 内核指定："2.6.18-238.el5"
+
 ### 4、查看结果
 ```sh
 $ cd /root/rpmbuild
