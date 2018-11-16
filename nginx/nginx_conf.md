@@ -103,4 +103,45 @@
 
   设置允许压缩的页面最小字节数，页面字节数从 header 头的 content-length 中获取。默认值是 20。建议设置成大于 1k 的字节数，小于 1k 可能会越压越大。
 
+* gzip_buffers 4 16k;
+
+  设置系统获取 4 个 16k 的 buffer 用于存储 gzip 的压缩结果数据流。
+
+* gzip_comp_level 6;
+
+  gzip 压缩比，1 压缩比最小处理速度对快，9 压缩比最大但处理速度最慢(传输快但比较消耗CPU)
+
+* gzip_types mime-type;
+
+  匹配 mime 类型进行压缩，无论是否指定，"text/html" 类型总是会被压缩的。比如，gzip_types text/plain text/css text/html
+
+* gzip_proxied any;
+
+  Nginx 作为反向代理的时候启用，决定开启或关闭后端服务器返回的结果是否压缩，前提是后端服务器必须要包含 "Via" 的头。
+
+* gzip_vary on;
+
+  和 http 头有关系，会在响应头加个 vary：Accept-Encoding，可以让前端的缓存服务器缓存经过 gzip 压缩的页面。
+
+
+## server 部分配置
+
+server 包含在 http{} 内部，每一个 server{} 都是一个虚拟主机(站点)。
+
+```bash
+server {
+    listen       127.0.0.1:80;
+    server_name  localhost www.linuxblogs.cn;
+    location / {
+        root html;
+        index index.html index.htm;
+    }
+    error_page  500 502 503 504 /50x.html;
+    location = /50x.html {
+        root html;
+    }
+}
+
+```
+
 ... 待更新 ...
