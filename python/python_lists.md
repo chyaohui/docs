@@ -1,4 +1,8 @@
-# PYthon列表常见操作
+> 记录总结 Python 列表常用的操作
+
+
+
+
 ## 一、迭代列表时如何访问列表下标索引
 普通版本：
 ```python
@@ -17,7 +21,7 @@ for index, item in enumerate(items):
 1 >>> 23
 2 >>> 45
 ```
-```enumerate```还可以指定元素的第一个元素从几开始，默认是0，也可以指定从1开始：
+`enumerate`还可以指定元素的第一个元素从几开始，默认是0，也可以指定从1开始：
 ```python
 for index, item in enumerate(items, start=1):
     print(index, ">>>", item)
@@ -26,7 +30,7 @@ for index, item in enumerate(items, start=1):
 3 >>> 45
 ```
 ## 二、append与extend方法有什么区别
-```append```表示把某个数据当做新元素追加到列表的最后面，它的参数可以是任意对象
+`append`表示把某个数据当做新元素追加到列表的最后面，它的参数可以是任意对象
 ```python
 x = [1, 2, 3]
 y = [4, 5]
@@ -35,7 +39,7 @@ print(x)
 >>>
 [1, 2, 3, [4, 5]]
 ```
-```extend```的参数必须是一个可迭代对象，表示把该对象里面的所有元素逐个地追加到列表的后面
+`extend`的参数必须是一个可迭代对象，表示把该对象里面的所有元素逐个地追加到列表的后面
 ```python
 x = [1, 2, 3]
 y = [4, 5]
@@ -237,4 +241,22 @@ items = [8, 23, 45, 12, 78]
 12
 ```
 
+## 十一、两个列表获取交集、并集、差集的方法
 
+* 获取两个 list 的交集
+  ```
+  result = list(set(a).intersection(set(b)))
+  ```
+
+* 获取两个 list 的并集
+
+  ```
+  result = list(set(a).union(set(b)))
+  ```
+
+* 获取两个 list 的差集
+
+  ```
+  result = list(set(b).difference(set(a)))
+  # 只在 b 中有，而 a 中没有。
+  ```
